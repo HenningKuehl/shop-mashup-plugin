@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/shop-mashup-plugin",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
