@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "shop-mashup-plugin",
     "public": "dist/shop-mashup-plugin",
     "ignore": [
       "firebase.json",
