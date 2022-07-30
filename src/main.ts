@@ -8,5 +8,13 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+chayns.ready.then(() => {
+  platformBrowserDynamic().bootstrapModule(AppModule)
+    .then(() => {
+      // @ts-ignore
+      chayns.ui.initAll();
+    })
+    .catch(err => console.error(err));
+}).catch(() => {
+  console.error('Chayns is not ready');
+});
