@@ -1449,6 +1449,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/chayns@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@types/chayns/-/chayns-3.1.4.tgz#7b87d6a00c95f884d0a91a9f09799bc604bb46fb"
+  integrity sha512-cuaj0+7GkXPCxObSJEukCMXAIugwxuLvaOvqVRkKl5se06FeNcquWcBESSR50O3NjVtH4UFdCGaJdjYb6QDecA==
+
 "@types/component-emitter@^1.2.10":
   version "1.2.11"
   resolved "https://registry.yarnpkg.com/@types/component-emitter/-/component-emitter-1.2.11.tgz#50d47d42b347253817a39709fef03ce66a108506"
@@ -2429,6 +2434,13 @@ cosmiconfig@^7.0.0:
     parse-json "^5.0.0"
     path-type "^4.0.0"
     yaml "^1.10.0"
+
+cps-app-helper@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/cps-app-helper/-/cps-app-helper-0.0.1.tgz#e784f852c37fec2e1e5bf020a5e6b8f424e9cd94"
+  integrity sha512-DkwWcvyp75UKELVJuA5Z4Iew2L6YKu+dU4u6JzS96lv4f2siTeJsvJ2yO3YGvrPdPAWm1OmTbzCudeXizxnj6g==
+  dependencies:
+    tslib "^2.3.0"
 
 critters@0.0.16:
   version "0.0.16"
@@ -4274,6 +4286,13 @@ neo-async@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
+
+ngx-chayns-components@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-chayns-components/-/ngx-chayns-components-0.0.1.tgz#2a309d320e9a3135380f5e5bf1dad93a1f61bbc5"
+  integrity sha512-WrZiT0mO3ia7cWpteMlrraozWkNvLyFiFrU7Y/Xcpiw8y5MdOSguLR+NOmO2Y0IxBCSJlWKituZ5iDHQK5HmvQ==
+  dependencies:
+    tslib "^2.3.0"
 
 nice-napi@^1.0.2:
   version "1.0.2"
