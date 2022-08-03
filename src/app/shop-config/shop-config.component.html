@@ -20,6 +20,18 @@
           <label for="switch" data-on="On" data-off="Off"></label>
         </div>
       </div>
+      <div class="form-field">
+        <span>Icon Image</span>
+        <div class="right">
+          <smp-file-upload></smp-file-upload>
+        </div>
+      </div>
+      <div class="form-field">
+        <span>Background Image</span>
+        <div class="right">
+          <smp-file-upload></smp-file-upload>
+        </div>
+      </div>
       <div class="form-field center">
         <button chaynsButton type="submit" [disabled]="shopForm.invalid" [ngClass]="{'button--disabled': shopForm.invalid}">Hinzufügen</button>
       </div>

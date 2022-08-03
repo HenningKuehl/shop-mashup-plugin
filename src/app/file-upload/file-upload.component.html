@@ -1,5 +1,9 @@
-<input type="file" [multiple]="false" (change)="selectFile($event)" accept="image/jpeg">
-<br>
-{{ uploadPercent | async }}
+<button type="button" class="choosebutton" (click)="openFileSelection()">
+  <span *ngIf="!uploaded && !uploading">Auswählen</span>
+  <span *ngIf="uploading">{{ uploadPercent | async }} %</span>
+  <span *ngIf="uploaded">Hochgeladen</span>
+</button>
 
-<img [src]="downloadUrl | async">
+<input #fileInput type="file" [multiple]="false" (change)="selectFile($event)" accept="image/jpeg" style="display: none;">
+
+<!--<img [src]="downloadUrl | async">-->
