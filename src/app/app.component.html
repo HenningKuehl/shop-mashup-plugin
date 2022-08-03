@@ -1,8 +1,28 @@
 <div chayns-tapp [plugin]="true">
 
+  <!--  <cps-app-helper></cps-app-helper>-->
+
+  <div chayns-tapp-intro>
+    <h1>Tapp Plugin</h1>
+    <p>Intro</p>
+  </div>
+
   <!-- Admin view -->
-  <div chayns-tapp-content></div>
+  <div chayns-tapp-content class="chayns__background-color--yellow-3">
+    <h2>Shop Mashup Plugin</h2>
+    <p>Here you can find the Administration for the shop mashup plugin</p>
+    <div chayns-accordion headerTitle="Configuration">
+      <div chayns-accordion-content>
+        Config
+      </div>
+    </div>
+    <div chayns-accordion headerTitle="Shops">
+      <smp-shop-config></smp-shop-config>
+    </div>
+  </div>
 
   <!-- Shop mashup view -->
-  <div chayns-tapp-content></div>
+  <div chayns-tapp-content>
+    Shop mashup view
+  </div>
 </div>

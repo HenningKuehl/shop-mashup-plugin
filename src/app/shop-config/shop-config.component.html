@@ -1,0 +1,29 @@
+<div chayns-accordion [wrapped]="true" headerTitle="Shop hinzufügen">
+  <div chayns-accordion-content>
+    <form [formGroup]="shopForm" class="form" (ngSubmit)="addOrSaveShop()">
+      <div class="form-field">
+        <input class="input" type="number" placeholder="BranchId" formControlName="branchId">
+      </div>
+      <div class="form-field">
+        <input class="input" type="text" placeholder="Name" formControlName="name">
+      </div>
+      <div class="form-field">
+        <input class="input" type="text" placeholder="Show-Name" formControlName="showName">
+      </div>
+      <div class="form-field">
+        <input class="input" type="url" placeholder="Linked Url" formControlName="linkedUrl">
+      </div>
+      <div class="form-field">
+        <span>Disabled</span>
+        <div class="right">
+          <input type="checkbox" class="switch" id="switch" formControlName="disabled">
+          <label for="switch" data-on="On" data-off="Off"></label>
+        </div>
+      </div>
+      <div class="form-field center">
+        <button chaynsButton type="submit" [disabled]="shopForm.invalid" [ngClass]="{'button--disabled': shopForm.invalid}">Hinzufügen</button>
+      </div>
+    </form>
+
+  </div>
+</div>
