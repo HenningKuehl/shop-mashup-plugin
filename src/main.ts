@@ -13,6 +13,7 @@ chayns.ready.then(() => {
     .then(() => {
       // @ts-ignore
       chayns.ui.initAll();
+      chayns.hideWaitCursor();
     })
     .catch(err => console.error(err));
 }).catch(() => {
