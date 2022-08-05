@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MashupShop} from "../models/mashup-shop";
+import {AngularFireStorage} from "@angular/fire/compat/storage";
+import {finalize, firstValueFrom, lastValueFrom} from "rxjs";
 
 @Component({
   selector: 'smp-shop-tile',
@@ -11,19 +13,10 @@ export class ShopTileComponent implements OnInit {
   @Input() mashupId!: string;
   @Input() shop!: MashupShop;
 
-  constructor() { }
+  constructor(private storage: AngularFireStorage) {
+  }
 
   ngOnInit(): void {
-  }
-
-  getIconUrl(): string {
-    // TODO: get firebase storage download url
-    return 'https://tsimg.cloud/77890-14363/8a0f9b7086630d6a1a7363e6e2051226c77764f5_w72-h72.jpg';
-  }
-
-  getBackgroundUrl(): string {
-    // TODO: get firebase storage download url
-    return 'https://video.tsimg.space/93279-08823/f2692d22-4876-4927-a8d7-7381907c51b4.jpg';
   }
 
   getTags(): string[] {

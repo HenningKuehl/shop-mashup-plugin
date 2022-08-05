@@ -5,10 +5,12 @@ export type WriteMashupShop = Pick<MashupShop, 'name' | 'showName' | 'linkedUrl'
 
 export interface MashupShop extends Identifier {
   name: string;
-  showName?: string;
-  linkedUrl?: string;
-  linkedTappId?: number;
+  showName: string;
+  linkedUrl: string;
+  linkedTappId: number;
   disabled: boolean;
+  iconUrl: string;
+  backgroundUrl: string;
   live?: MashupShopLiveData;
 }
 

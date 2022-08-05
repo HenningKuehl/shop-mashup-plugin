@@ -28,7 +28,7 @@
   <div chayns-tapp-content *ngIf="mashup">
     <!-- TODO: make flexible with flex-layout -->
     <div class="tiles" fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="15px grid">
-      <smp-shop-tile *ngFor="let shop of mashup.shops" fxFlex="calc(50% - 15px)" [shop]="shop"></smp-shop-tile>
+      <smp-shop-tile *ngFor="let shop of mashup.shops" fxFlex="calc(50% - 15px)" [shop]="shop" [mashupId]="mashup.id"></smp-shop-tile>
     </div>
   </div>
 </div>

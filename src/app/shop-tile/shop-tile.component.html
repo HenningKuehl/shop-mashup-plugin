@@ -1,7 +1,7 @@
 <div class="tile" [ngClass]="{'linked': shop.linkedTappId || shop.linkedUrl}" (click)="clickTile()">
-  <div class="header" fxLayout="row" fxLayoutAlign="center center" [style.background-image]="'url(' + getBackgroundUrl() + ')'">
+  <div class="header" fxLayout="row" fxLayoutAlign="center center" [style.background-image]="'url(' + shop.backgroundUrl + ')'">
     <div class="icon">
-      <img [src]="getIconUrl()">
+      <img *ngIf="shop.iconUrl" [src]="shop.iconUrl">
     </div>
   </div>
   <div class="content" fxLayout="column">
