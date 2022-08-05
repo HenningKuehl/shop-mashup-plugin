@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {MashupShop} from "../models/mashup-shop";
+import {MashupShop, WriteMashupShop} from "../models/mashup-shop";
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {ApiResult} from "../models/api-result";
@@ -12,7 +12,7 @@ export class MashupShopService {
   constructor(private http: HttpClient) {
   }
 
-  addNewShop(branchId: number, data: MashupShop): Observable<MashupShop> {
+  addNewShop(branchId: number, data: WriteMashupShop): Observable<MashupShop> {
     // TODO: get mashup id
     const mashupId = '';
     // TODO: add authorization to api service

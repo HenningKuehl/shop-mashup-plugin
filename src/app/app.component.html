@@ -18,7 +18,8 @@
         Config
       </div>
     </div>
-    <div chayns-accordion headerTitle="Shops">
+    <div chayns-accordion headerTitle="Shops" *ngIf="mashup">
+      <smp-shop-config *ngFor="let shop of mashup.shops" [shop]="shop"></smp-shop-config>
       <smp-shop-config></smp-shop-config>
     </div>
   </div>

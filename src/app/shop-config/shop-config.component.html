@@ -1,4 +1,4 @@
-<div chayns-accordion [wrapped]="true" headerTitle="Shop hinzufügen">
+<div chayns-accordion [wrapped]="true" [headerTitle]="getHeaderTitle()">
   <div chayns-accordion-content>
     <form [formGroup]="shopForm" class="form" (ngSubmit)="addOrSaveShop()">
       <div class="form-field">
@@ -33,7 +33,11 @@
         </div>
       </div>
       <div class="form-field center">
-        <button chaynsButton type="submit" [disabled]="shopForm.invalid" [ngClass]="{'button--disabled': shopForm.invalid}">Hinzufügen</button>
+        <!-- TODO: use fixed version of ngx-chayns-components for disabled function -->
+        <button chaynsButton type="submit" [disabled]="shopForm.invalid || !shopForm.touched" [ngClass]="{'button--disabled': shopForm.invalid || !shopForm.touched}">
+          <span *ngIf="createNew">Hinzufügen</span>
+          <span *ngIf="!createNew">Speichern</span>
+        </button>
       </div>
     </form>
 

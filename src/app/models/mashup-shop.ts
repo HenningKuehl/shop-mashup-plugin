@@ -1,4 +1,9 @@
-export interface MashupShop {
+import {Identifier} from "./identifier";
+import {Mashup} from "./mashup";
+
+export type WriteMashupShop = Pick<MashupShop, 'name' | 'showName' | 'linkedUrl' | 'disabled'>;
+
+export interface MashupShop extends Identifier {
   name: string;
   showName?: string;
   linkedUrl?: string;
