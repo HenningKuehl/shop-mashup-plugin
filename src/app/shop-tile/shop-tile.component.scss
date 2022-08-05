@@ -1,0 +1,70 @@
+.tile {
+  //margin-bottom: 15px;
+
+  &.linked {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+
+  .header {
+    height: 150px;
+    background-color: aliceblue;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+
+    /* blur effect */
+    /*filter: blur(8px);
+    -webkit-filter: blur(8px);*/
+
+    .icon {
+      position: fixed;
+
+      width: 75px;
+      height: 75px;
+      background-color: antiquewhite;
+      box-shadow: 0px 20px 20px 20px rgb(0 0 0 / 50%)
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .content {
+    margin-top: 5px;
+
+    .name {
+      margin-right: 4px;
+      font-weight: bold;
+    }
+
+    .status {
+      .opened, .closed {
+        padding: 0 5px;
+        border-radius: 15px;
+      }
+
+      .opened {
+        background-color: green;
+      }
+
+      .closed {
+        background-color: red;
+      }
+    }
+
+    .processors {
+      .processor {
+        i {
+          //text-align: center;
+          width: 25px;
+        }
+      }
+    }
+  }
+}

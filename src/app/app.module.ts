@@ -13,12 +13,15 @@ import { environment } from '../environments/environment';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import { ShopTileComponent } from './shop-tile/shop-tile.component';
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
     AppComponent,
     ShopConfigComponent,
     FileUploadComponent,
+    ShopTileComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
     // provideFirebaseApp(() => initializeApp(environment.firebase)),
     // provideStorage(() => getStorage()),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    FlexLayoutModule
   ],
   providers: [
     CpsAppHelperService

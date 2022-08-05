@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {MashupShop} from "./mashup-shop";
+import {MashupShop} from "../models/mashup-shop";
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
-import {ApiResult} from "./models/api-result";
+import {ApiResult} from "../models/api-result";
 
 @Injectable({
   providedIn: 'root'

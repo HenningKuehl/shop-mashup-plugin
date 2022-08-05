@@ -1,0 +1,37 @@
+<div class="tile" [ngClass]="{'linked': shop.linkedTappId || shop.linkedUrl}" (click)="clickTile()">
+  <div class="header" fxLayout="row" fxLayoutAlign="center center" [style.background-image]="'url(' + getBackgroundUrl() + ')'">
+    <div class="icon">
+      <img [src]="getIconUrl()">
+    </div>
+  </div>
+  <div class="content" fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <div fxLayout="row" fxLayoutAlign="start center"  >
+        <div class="name">
+          {{ shop.showName || shop.name }}
+        </div>
+        <div class="tags" *ngIf="getTags().length">
+          <span> | </span>
+          <span *ngFor="let tag of getTags(); let last = last;">
+            {{ tag }}
+            <span *ngIf="!last"> · </span>
+          </span>
+        </div>
+      </div>
+      <div class="status" fxFlex="none" *ngIf="shop.live">
+        <div class="opened" *ngIf="shop.live.open">Geöffnet</div>
+        <div class="closed" *ngIf="!shop.live.open">Geschlossen</div>
+      </div>
+    </div>
+    <div class="processors" *ngIf="shop.live">
+      <div class="processor" *ngFor="let processor of shop.live.processors">
+        <ng-container [ngSwitch]="processor.type">
+          <i *ngSwitchCase="4" class="fa fa-truck"></i>
+          <i *ngSwitchCase="8" class="fa fa-bag-shopping"></i>
+          <i *ngSwitchDefault class="fa fa-truck"></i>
+        </ng-container>
+        <span>ca. {{processor.deliveryTime}} Minuten</span>
+      </div>
+    </div>
+  </div>
+</div>

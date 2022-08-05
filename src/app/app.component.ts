@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {CpsAppHelperService} from "cps-app-helper";
 import {environment} from "../environments/environment";
+import {MashupService} from "./services/mashup.service";
+import {lastValueFrom, Observable} from "rxjs";
+import {Mashup} from "./models/mashup";
 
 @Component({
   selector: 'smp-root',
@@ -8,10 +11,13 @@ import {environment} from "../environments/environment";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private cpsAppHelper: CpsAppHelperService) {
+  mashup: Mashup | null = null;
+
+  constructor(private cpsAppHelper: CpsAppHelperService, private mashupService: MashupService) {
   }
 
   ngOnInit() {
+    this.getMashup();
     this.cpsAppHelper.authenticate({
       appId: environment.applicationId,
       tappId: chayns.env.site.tapp.id,
@@ -22,5 +28,10 @@ export class AppComponent implements OnInit {
     }).catch(err => {
       console.error(err);
     });
+  }
+
+  private async getMashup() {
+    console.log('get mashup');
+    this.mashup = await lastValueFrom(this.mashupService.getMashup());
   }
 }

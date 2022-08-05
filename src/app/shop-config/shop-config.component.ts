@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
-import {MashupShopService} from "../mashup-shop.service";
+import {MashupShopService} from "../services/mashup-shop.service";
 import {lastValueFrom} from "rxjs";
 
 @Component({
