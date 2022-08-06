@@ -12,15 +12,55 @@ export class MashupShopService {
   constructor(private http: HttpClient) {
   }
 
-  addNewShop(branchId: number, data: WriteMashupShop): Observable<MashupShop> {
-    // TODO: get mashup id
-    const mashupId = '';
+  addNewShop(mashupId: string, branchId: number, data: WriteMashupShop): Observable<MashupShop> {
     // TODO: add authorization to api service
-    return this.http.post<ApiResult<MashupShop>>(`https://cps-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops`, {
-      data,
-      branchId
-    }, {headers: {'Authorization': `Bearer ${chayns.env.user.tobitAccessToken}`}}).pipe(map(res => {
-      return res.data;
-    }));
+    const headers = {
+      'Authorization': `Bearer ${chayns.env.user.tobitAccessToken}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http
+      .post<ApiResult<MashupShop>>(
+        `https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops`,
+        {
+          data,
+          branchId
+        },
+        {headers}
+      )
+      .pipe(map(res => {
+        return res.data;
+      }));
+  }
+
+  updateShop(mashupId: string, branchId: number, data: WriteMashupShop): Observable<MashupShop> {
+    // TODO: add authorization to api service
+    const headers = {
+      'Authorization': `Bearer ${chayns.env.user.tobitAccessToken}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http
+      .put<ApiResult<MashupShop>>(
+        `https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops/${branchId}`,
+        {
+          ...data
+        },
+        {headers}
+      )
+      .pipe(map(res => {
+        return res.data;
+      }));
+  }
+
+  deleteShop(mashupId: string, branchId: number): Observable<ApiResult<{}>> {
+    // TODO: add authorization to api service
+    const headers = {
+      'Authorization': `Bearer ${chayns.env.user.tobitAccessToken}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http
+      .delete<ApiResult<{}>>(
+        `https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops/${branchId}`,
+        {headers}
+      );
   }
 }

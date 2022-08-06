@@ -1,9 +1,11 @@
-<button type="button" class="choosebutton" (click)="openFileSelection()">
+<button type="button" class="choosebutton" [disabled]="disabled || uploaded || uploading"
+        [ngClass]="{'button--disabled': disabled || uploaded || uploading}" (click)="openFileSelection()">
   <span *ngIf="!uploaded && !uploading">Auswählen</span>
   <span *ngIf="uploading">{{ uploadPercent | async }} %</span>
   <span *ngIf="uploaded">Hochgeladen</span>
 </button>
 
-<input #fileInput type="file" [multiple]="false" (change)="selectFile($event)" accept="image/jpeg" style="display: none;">
+<input #fileInput type="file" [multiple]="false" (change)="selectFile($event)" accept="image/jpeg"
+       style="display: none;">
 
 <!--<img [src]="downloadUrl | async">-->

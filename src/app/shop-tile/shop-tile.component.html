@@ -10,9 +10,9 @@
         <div class="name">
           {{ shop.showName || shop.name }}
         </div>
-        <div class="tags" *ngIf="getTags().length">
+        <div class="tags" *ngIf="getTagNames().length">
           <span> | </span>
-          <span *ngFor="let tag of getTags(); let last = last;">
+          <span *ngFor="let tag of getTagNames(); let last = last;">
             {{ tag }}
             <span *ngIf="!last"> · </span>
           </span>

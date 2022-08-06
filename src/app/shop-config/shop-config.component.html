@@ -2,7 +2,7 @@
   <div chayns-accordion-content>
     <form [formGroup]="shopForm" class="form" (ngSubmit)="addOrSaveShop()">
       <div class="form-field">
-        <input class="input" type="number" placeholder="BranchId" formControlName="branchId">
+        <input class="input" type="number" placeholder="BranchId" formControlName="branchId" [attr.disabled]="!createNew">
       </div>
       <div class="form-field">
         <input class="input" type="text" placeholder="Name" formControlName="name">
@@ -23,21 +23,37 @@
       <div class="form-field">
         <span>Icon Image</span>
         <div class="right">
-          <smp-file-upload></smp-file-upload>
+          <smp-file-upload fileName="icon"
+                           [filePath]="getImagePath()"
+                           [disabled]="shopForm.controls.branchId.invalid || shop?.iconUrl !== '' || loading">
+          </smp-file-upload>
         </div>
       </div>
       <div class="form-field">
         <span>Background Image</span>
         <div class="right">
-          <smp-file-upload></smp-file-upload>
+          <smp-file-upload fileName="background" [filePath]="getImagePath()"
+                           [disabled]="shopForm.controls.branchId.invalid || shop?.backgroundUrl !== '' || loading">
+          </smp-file-upload>
+        </div>
+      </div>
+      <div class="form-field" *ngIf="!createNew">
+        <span>Tags</span>
+        <div class="right">
+          <button type="button" class="choosebutton" (click)="openTagsSelectionDialog()" [disabled]="loading"
+                  [ngClass]="{'button--disabled': loading}">
+            {{ getTagNames() }}
+          </button>
         </div>
       </div>
       <div class="form-field center">
         <!-- TODO: use fixed version of ngx-chayns-components for disabled function -->
-        <button chaynsButton type="submit" [disabled]="shopForm.invalid || !shopForm.touched" [ngClass]="{'button--disabled': shopForm.invalid || !shopForm.touched}">
+        <button chaynsButton type="submit" [disabled]="shopForm.invalid || !shopForm.touched || loading"
+                [ngClass]="{'button--disabled': shopForm.invalid || !shopForm.touched || loading}">
           <span *ngIf="createNew">Hinzufügen</span>
           <span *ngIf="!createNew">Speichern</span>
         </button>
+        <button chaynsButton type="button" *ngIf="!createNew" [disabled]="loading" (click)="deleteShop()">Löschen</button>
       </div>
     </form>
 

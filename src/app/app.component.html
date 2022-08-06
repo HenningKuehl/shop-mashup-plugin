@@ -1,34 +1,43 @@
 <div chayns-tapp [plugin]="true">
 
-
-  <!--  <cps-app-helper></cps-app-helper>-->
-
-  <div chayns-tapp-intro>
-    <h1>Tapp Plugin</h1>
-    <p>Intro</p>
-  </div>
-
   <!-- Admin view -->
-  <div chayns-tapp-content class="chayns__background-color--yellow-3">
+  <div chayns-tapp-content class="chayns__background-color--yellow-3" *ngIf="adminMode">
     <h2>Shop Mashup Plugin</h2>
     <p>Here you can find the Administration for the shop mashup plugin</p>
-<!--    <smp-file-upload></smp-file-upload>-->
     <div chayns-accordion headerTitle="Configuration">
       <div chayns-accordion-content>
         Config
       </div>
     </div>
     <div chayns-accordion headerTitle="Shops" *ngIf="mashup">
-      <smp-shop-config *ngFor="let shop of mashup.shops" [shop]="shop"></smp-shop-config>
-      <smp-shop-config></smp-shop-config>
+      <smp-shop-config *ngFor="let shop of mashup.shops; trackBy: identify"
+                       [shop]="shop" [mashupId]="mashup.id"
+                       (updated)="getMashup()" (deleted)="getMashup()">
+      </smp-shop-config>
+      <smp-shop-config [mashupId]="mashup.id" (created)="newShopAdded($event)"></smp-shop-config>
+    </div>
+    <div chayns-accordion headerTitle="Tags" *ngIf="mashup">
+      <smp-tag-config *ngFor="let tag of mashup.tags; trackBy: identify" [tagId]="tag.id" [name]="tag.name" [mashupId]="mashup.id"
+                      (updated)="getMashup()" (deleted)="getMashup()">
+      </smp-tag-config>
+      <smp-tag-config [mashupId]="mashup.id" (created)="getMashup()"></smp-tag-config>
     </div>
   </div>
 
   <!-- Shop mashup view -->
+  <div chayns-tapp-content *ngIf="initialLoading">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <chayns-small-wait-cursor [showBackground]="true"></chayns-small-wait-cursor>
+    </div>
+  </div>
   <div chayns-tapp-content *ngIf="mashup">
-    <!-- TODO: make flexible with flex-layout -->
+    <div class="filter">
+      <chayns-chip-list [selectAllChip]="true" (change)="tagSelectionChanged($event)">
+        <chayns-filter-button *ngFor="let tag of mashup.tags" [id]="tag.id">{{ tag.name }}</chayns-filter-button>
+      </chayns-chip-list>
+    </div>
     <div class="tiles" fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="15px grid">
-      <smp-shop-tile *ngFor="let shop of mashup.shops" fxFlex="calc(50% - 15px)" [shop]="shop" [mashupId]="mashup.id"></smp-shop-tile>
+      <smp-shop-tile *ngFor="let shop of mashup.shops | shopFilter:selectedTagIds:allTagsSelected; trackBy: identify" fxFlex="0 1 calc(50% - 15px)" [shop]="shop" [mashupId]="mashup.id"></smp-shop-tile>
     </div>
   </div>
 </div>

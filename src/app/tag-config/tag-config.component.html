@@ -1,0 +1,15 @@
+<div chayns-accordion [wrapped]="true" [headerTitle]="getHeaderTitle()">
+  <div chayns-accordion-content>
+    <div class="form-field">
+      <input type="text" class="input" [(ngModel)]="name" placeholder="Name">
+    </div>
+    <div class="center">
+      <button type="button" class="button" [disabled]="loading || !name"
+              [ngClass]="{'button--disabled': loading || !name}" (click)="crateOrSaveTag()">
+        <span *ngIf="createNew">Hinzufügen</span>
+        <span *ngIf="!createNew">Speichern</span>
+      </button>
+      <button *ngIf="!createNew" type="button" class="button" (click)="deleteTag()">Löschen</button>
+    </div>
+  </div>
+</div>

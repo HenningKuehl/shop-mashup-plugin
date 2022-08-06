@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import {NgxChaynsComponentsModule} from "ngx-chayns-components";
 import {CpsAppHelperModule, CpsAppHelperService} from "cps-app-helper";
 import { ShopConfigComponent } from './shop-config/shop-config.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { environment } from '../environments/environment';
@@ -13,6 +13,8 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { ShopTileComponent } from './shop-tile/shop-tile.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
+import { TagConfigComponent } from './tag-config/tag-config.component';
+import { ShopFilterPipe } from './shop-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     ShopConfigComponent,
     FileUploadComponent,
     ShopTileComponent,
+    TagConfigComponent,
+    ShopFilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -31,10 +35,12 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     // provideStorage(() => getStorage()),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule
   ],
   providers: [
-    CpsAppHelperService
+    CpsAppHelperService,
+    ShopFilterPipe
   ],
   bootstrap: [AppComponent]
 })

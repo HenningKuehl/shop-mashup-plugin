@@ -11,6 +11,7 @@ export interface MashupShop extends Identifier {
   disabled: boolean;
   iconUrl: string;
   backgroundUrl: string;
+  tagRefs: Identifier[];
   live?: MashupShopLiveData;
 }
 

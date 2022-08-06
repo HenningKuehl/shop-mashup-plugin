@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+
+// TODO: create form-field component in ngx-chayns-components
+.form-field {
+  width: 100%;
+  margin-bottom: 15px;
+
+  .input {
+    width: 100%;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .right {
+    float: right;
+  }
+}
+
+.center {
+  text-align: center;
+  margin-top: 20px;
+
+  button {
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

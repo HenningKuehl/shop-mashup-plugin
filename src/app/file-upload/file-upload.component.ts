@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {finalize, Observable} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 
@@ -8,6 +8,10 @@ import {AngularFireStorage} from "@angular/fire/compat/storage";
   styleUrls: ['./file-upload.component.scss']
 })
 export class FileUploadComponent implements OnInit {
+  @Input() disabled = false;
+  @Input() filePath!: string;
+  @Input() fileName!: string;
+
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   private selectedFile: File | null = null;
   uploadPercent: Observable<number | undefined> = new Observable<number>();
@@ -45,10 +49,7 @@ export class FileUploadComponent implements OnInit {
 
   pushFileToStorage(file: File) {
     this.uploading = true;
-    // TODO: set mashupId and shopId
-    const mashupId = 'test_mashup';
-    const shopId = 'test_shop';
-    const filePath = `shop-mashup-plugin/${mashupId}/${shopId}/icon.${file.name.split('.').pop()}`;
+    const filePath = `${this.filePath}/${this.fileName}.${file.name.split('.').pop()}`;
     const fileRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, file);
     uploadTask.snapshotChanges().pipe(finalize(() => {

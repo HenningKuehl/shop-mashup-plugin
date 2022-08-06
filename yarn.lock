@@ -4980,10 +4980,10 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-ngx-chayns-components@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/ngx-chayns-components/-/ngx-chayns-components-0.0.1.tgz#2a309d320e9a3135380f5e5bf1dad93a1f61bbc5"
-  integrity sha512-WrZiT0mO3ia7cWpteMlrraozWkNvLyFiFrU7Y/Xcpiw8y5MdOSguLR+NOmO2Y0IxBCSJlWKituZ5iDHQK5HmvQ==
+ngx-chayns-components@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/ngx-chayns-components/-/ngx-chayns-components-0.0.4.tgz#1391727061771d157eea32a21f7a592ecd74848e"
+  integrity sha512-VKQRMk/40huThtxB2L5GpjRWTVZkZpEmKlc+G7AK7hMVNhLgxxe9KeHTWBuc4f+JFsga0HrRbiGyUadmx7H4wQ==
   dependencies:
     tslib "^2.3.0"
 
