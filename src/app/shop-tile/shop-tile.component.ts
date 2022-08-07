@@ -43,6 +43,14 @@ export class ShopTileComponent implements OnInit, OnDestroy {
     if (this.shop.linkedUrl) {
       window.open(this.shop.linkedUrl, '_blank');
     }
+
+    if (this.shop.linkedTappId) {
+      chayns.selectTapp({id: this.shop.linkedTappId});
+    }
+  }
+
+  hasLink(): boolean {
+    return this.shop.linkedUrl !== '' || this.shop.linkedTappId !== 0;
   }
 
 }

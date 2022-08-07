@@ -1,4 +1,4 @@
-<div class="tile" [ngClass]="{'linked': shop.linkedTappId || shop.linkedUrl}" (click)="clickTile()">
+<div class="tile" [ngClass]="{'linked': hasLink()}" (click)="clickTile()">
   <div class="header" fxLayout="row" fxLayoutAlign="center center" [style.background-image]="'url(' + shop.backgroundUrl + ')'">
     <div class="icon">
       <img *ngIf="shop.iconUrl" [src]="shop.iconUrl">
@@ -34,7 +34,7 @@
       </div>
     </div>
   </div>
-  <div class="footer" *ngIf="shop.linkedUrl" fxHide fxShow.xs="true" fxLayout="row" fxLayoutAlign="end center">
+  <div class="footer" *ngIf="hasLink()" fxHide fxShow.xs="true" fxLayout="row" fxLayoutAlign="end center">
     <div class="link">
       <a [href]="shop.linkedUrl">Zum Shop >></a>
     </div>
