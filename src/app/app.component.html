@@ -36,7 +36,7 @@
         <chayns-filter-button *ngFor="let tag of mashup.tags" [id]="tag.id">{{ tag.name }}</chayns-filter-button>
       </chayns-chip-list>
     </div>
-    <div class="tiles" fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="15px grid">
+    <div class="tiles" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between" fxLayoutGap="15px grid">
       <smp-shop-tile *ngFor="let shop of mashup.shops | shopFilter:selectedTagIds:allTagsSelected; trackBy: identify" fxFlex="0 1 calc(50% - 15px)" [shop]="shop" [mashupId]="mashup.id"></smp-shop-tile>
     </div>
   </div>

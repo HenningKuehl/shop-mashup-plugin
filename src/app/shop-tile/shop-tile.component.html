@@ -34,4 +34,9 @@
       </div>
     </div>
   </div>
+  <div class="footer" *ngIf="shop.linkedUrl" fxHide fxShow.xs="true" fxLayout="row" fxLayoutAlign="end center">
+    <div class="link">
+      <a [href]="shop.linkedUrl">Zum Shop >></a>
+    </div>
+  </div>
 </div>
