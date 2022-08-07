@@ -2993,10 +2993,10 @@ cosmiconfig@^7.0.0:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
-cps-app-helper@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/cps-app-helper/-/cps-app-helper-0.0.1.tgz#e784f852c37fec2e1e5bf020a5e6b8f424e9cd94"
-  integrity sha512-DkwWcvyp75UKELVJuA5Z4Iew2L6YKu+dU4u6JzS96lv4f2siTeJsvJ2yO3YGvrPdPAWm1OmTbzCudeXizxnj6g==
+cps-app-helper@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/cps-app-helper/-/cps-app-helper-0.0.4.tgz#8b00d2569c48d1eaad421b714ec0da3b6ef979ae"
+  integrity sha512-UlieMw9N7kZCik52PcKj4yFXBMPfX5oW9LDSITrPPn5R3gjMRv79Y0eR60Iuh8kDU6peAYWp6ZYLIasXfjCfxA==
   dependencies:
     tslib "^2.3.0"
 

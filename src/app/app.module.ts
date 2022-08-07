@@ -28,7 +28,7 @@ import { ShopFilterPipe } from './shop-filter.pipe';
   imports: [
     BrowserModule,
     NgxChaynsComponentsModule,
-    CpsAppHelperModule,
+    CpsAppHelperModule.initializeApp(environment.applicationId),
     ReactiveFormsModule,
     HttpClientModule,
     // provideFirebaseApp(() => initializeApp(environment.firebase)),

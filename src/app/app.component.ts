@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CpsAppHelperService} from "cps-app-helper";
-import {environment} from "../environments/environment";
+import {CpsAppHelperService, isShopMashupPluginInstanceConfig} from "cps-app-helper";
 import {MashupService} from "./services/mashup.service";
 import {lastValueFrom, Observable} from "rxjs";
 import {Mashup} from "./models/mashup";
@@ -19,27 +18,25 @@ export class AppComponent implements OnInit {
   selectedTagIds: string[] = [];
   allTagsSelected: boolean = true;
   initialLoading: boolean = true;
+  mashupId!: string;
 
   constructor(private cpsAppHelper: CpsAppHelperService, private mashupService: MashupService) {
   }
 
   ngOnInit() {
-    this.getMashup();
-    /*this.cpsAppHelper.authenticate({
-      appId: environment.applicationId,
-      tappId: chayns.env.site.tapp.id,
-      siteId: chayns.env.site.id,
-      token: chayns.env.user.tobitAccessToken,
-    }).then(authenticated => {
-      console.log(authenticated);
-    }).catch(err => {
-      console.error(err);
-    });*/
+    this.cpsAppHelper.getAppInstance().subscribe(appInstance => {
+      console.log('app instance', appInstance.config);
+      const config = appInstance.config;
+      if (config && isShopMashupPluginInstanceConfig(config)) {
+        this.mashupId = config.mashupRef.id;
+        this.getMashup();
+      }
+    });
   }
 
   async getMashup() {
     chayns.showWaitCursor();
-    this.mashup = await lastValueFrom(this.mashupService.getMashup());
+    this.mashup = await lastValueFrom(this.mashupService.getMashup(this.mashupId));
     chayns.hideWaitCursor();
     if (this.initialLoading) {
       this.selectedTagIds = this.mashup.tags.map(tag => tag.id);
