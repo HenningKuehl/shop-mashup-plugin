@@ -26,6 +26,7 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
     name: ['', Validators.required],
     showName: [''],
     linkedUrl: [''],
+    linkedTappId: [''],
     disabled: [false, Validators.required],
     locationId: ['', [Validators.required, Validators.min(1)]]
   });
@@ -54,6 +55,7 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
           linkedUrl: this.shop.linkedUrl || '',
           disabled: this.shop.disabled,
           locationId: `${this.shop.locationId}`,
+          linkedTappId: `${this.shop.linkedTappId}`
         })
       }
     }
@@ -82,7 +84,8 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
         showName: this.shopForm.value.showName || '',
         linkedUrl: this.shopForm.value.linkedUrl || '',
         disabled: this.shopForm.value.disabled || false,
-        locationId: Number(this.shopForm.value.locationId)
+        locationId: Number(this.shopForm.value.locationId),
+        linkedTappId: Number(this.shopForm.value.linkedTappId) || 0,
       }));
       this.created.emit(mashupShop);
       this.shopForm.reset();
@@ -93,7 +96,8 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
         showName: this.shopForm.value.showName || '',
         linkedUrl: this.shopForm.value.linkedUrl || '',
         disabled: this.shopForm.value.disabled || false,
-        locationId: Number(this.shopForm.value.locationId)
+        locationId: Number(this.shopForm.value.locationId),
+        linkedTappId: Number(this.shopForm.value.linkedTappId) || 0,
       }));
       console.log('updated shop', mashupShop);
       this.updated.emit(mashupShop);
@@ -189,6 +193,34 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
           this.deleted.emit();
         }
       });
+  }
+
+  openLinkedTappSelectDialog() {
+    chayns.dialog.select({
+      list: chayns.env.site.tapps.map(tapp => ({
+        name: tapp.showName,
+        isSelected: Number(this.shopForm.value.linkedTappId) === tapp.id,
+        value: `${tapp.id}`,
+      })),
+      multiselect: false,
+      quickfind: true,
+      title: ''
+    }).then(result => {
+      if (result.buttonType === buttonType.POSITIVE) {
+        this.shopForm.patchValue({
+          linkedTappId: result.selection[0].value,
+          linkedUrl: '',
+        });
+      }
+    }).catch(console.error);
+  }
+
+  linkedUrlChanged(event: any): void {
+    console.log(event);
+  }
+
+  getLinkedTapp(): string {
+    return chayns.env.site.tapps.find(tapp => tapp.id === Number(this.shopForm.value.linkedTappId))?.showName || 'Keinen Ausgewählt';
   }
 
 }

@@ -14,7 +14,13 @@
         <input class="input" type="text" placeholder="Show-Name" formControlName="showName">
       </div>
       <div class="form-field">
-        <input class="input" type="url" placeholder="Linked Url" formControlName="linkedUrl">
+        <input class="input" type="url" placeholder="Linked Url" formControlName="linkedUrl" (change)="linkedUrlChanged($event)">
+      </div>
+      <div class="form-field">
+        <span>Linked Tapp</span>
+        <div class="right">
+          <button chaynsButton [chooseButton]="true" (click)="openLinkedTappSelectDialog()">{{ getLinkedTapp() }}</button>
+        </div>
       </div>
       <div class="form-field">
         <span>Disabled</span>
