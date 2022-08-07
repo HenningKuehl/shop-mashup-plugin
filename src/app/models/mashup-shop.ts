@@ -1,7 +1,7 @@
 import {Identifier} from "./identifier";
 import {Mashup} from "./mashup";
 
-export type WriteMashupShop = Pick<MashupShop, 'name' | 'showName' | 'linkedUrl' | 'disabled'>;
+export type WriteMashupShop = Pick<MashupShop, 'name' | 'showName' | 'linkedUrl' | 'disabled' | 'locationId'>;
 
 export interface MashupShop extends Identifier {
   name: string;
@@ -13,6 +13,7 @@ export interface MashupShop extends Identifier {
   backgroundUrl: string;
   tagRefs: Identifier[];
   live?: MashupShopLiveData;
+  locationId: number;
 }
 
 export interface MashupShopLiveData {

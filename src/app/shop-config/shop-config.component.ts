@@ -26,7 +26,8 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
     name: ['', Validators.required],
     showName: [''],
     linkedUrl: [''],
-    disabled: [false, Validators.required]
+    disabled: [false, Validators.required],
+    locationId: ['', [Validators.required, Validators.min(1)]]
   });
 
   createNew = false;
@@ -51,7 +52,8 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
           name: this.shop.name,
           showName: this.shop.showName || '',
           linkedUrl: this.shop.linkedUrl || '',
-          disabled: this.shop.disabled
+          disabled: this.shop.disabled,
+          locationId: `${this.shop.locationId}`,
         })
       }
     }
@@ -79,7 +81,8 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
         name: this.shopForm.value.name || '',
         showName: this.shopForm.value.showName || '',
         linkedUrl: this.shopForm.value.linkedUrl || '',
-        disabled: this.shopForm.value.disabled || false
+        disabled: this.shopForm.value.disabled || false,
+        locationId: Number(this.shopForm.value.locationId)
       }));
       this.created.emit(mashupShop);
       this.shopForm.reset();
@@ -89,7 +92,8 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
         name: this.shopForm.value.name || '',
         showName: this.shopForm.value.showName || '',
         linkedUrl: this.shopForm.value.linkedUrl || '',
-        disabled: this.shopForm.value.disabled || false
+        disabled: this.shopForm.value.disabled || false,
+        locationId: Number(this.shopForm.value.locationId)
       }));
       console.log('updated shop', mashupShop);
       this.updated.emit(mashupShop);
