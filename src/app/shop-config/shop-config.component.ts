@@ -196,12 +196,18 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   openLinkedTappSelectDialog() {
-    chayns.dialog.select({
-      list: chayns.env.site.tapps.map(tapp => ({
+
+    const list: DialogSelectConfigItem[] = chayns.env.site.tapps
+      .filter(tapp => tapp.sortId >= 0)
+      .sort(tapp => tapp.sortId)
+      .map(tapp => ({
         name: tapp.showName,
         isSelected: Number(this.shopForm.value.linkedTappId) === tapp.id,
         value: `${tapp.id}`,
-      })),
+      }))
+
+    chayns.dialog.select({
+      list,
       multiselect: false,
       quickfind: true,
       title: ''
@@ -211,12 +217,15 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
           linkedTappId: result.selection[0].value,
           linkedUrl: '',
         });
+        this.shopForm.markAsTouched();
       }
     }).catch(console.error);
   }
 
-  linkedUrlChanged(event: any): void {
-    console.log(event);
+  linkedUrlChanged(event: Event): void {
+    this.shopForm.patchValue({
+      linkedTappId: '',
+    })
   }
 
   getLinkedTapp(): string {
