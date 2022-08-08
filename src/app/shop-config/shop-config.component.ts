@@ -232,4 +232,8 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
     return chayns.env.site.tapps.find(tapp => tapp.id === Number(this.shopForm.value.linkedTappId))?.showName || 'Keinen Ausgewählt';
   }
 
+  disableInput(): true | null {
+    return this.createNew ? null : true;
+  }
+
 }

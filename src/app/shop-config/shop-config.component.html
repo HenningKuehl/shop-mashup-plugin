@@ -2,10 +2,12 @@
   <div chayns-accordion-content>
     <form [formGroup]="shopForm" class="form" (ngSubmit)="addOrSaveShop()">
       <div class="form-field">
-        <input class="input" type="number" placeholder="BranchId" formControlName="branchId" [attr.disabled]="!createNew">
+        <input class="input" type="number" placeholder="BranchId" formControlName="branchId"
+               [attr.disabled]="disableInput()">
       </div>
       <div class="form-field">
-        <input class="input" type="number" placeholder="LocationId" formControlName="locationId" [attr.disabled]="!createNew">
+        <input class="input" type="number" placeholder="LocationId" formControlName="locationId"
+               [attr.disabled]="disableInput()">
       </div>
       <div class="form-field">
         <input class="input" type="text" placeholder="Name" formControlName="name">
@@ -14,12 +16,15 @@
         <input class="input" type="text" placeholder="Show-Name" formControlName="showName">
       </div>
       <div class="form-field">
-        <input class="input" type="url" placeholder="Linked Url" formControlName="linkedUrl" (change)="linkedUrlChanged($event)">
+        <input class="input" type="url" placeholder="Linked Url" formControlName="linkedUrl"
+               (change)="linkedUrlChanged($event)">
       </div>
       <div class="form-field">
         <span>Linked Tapp</span>
         <div class="right">
-          <button chaynsButton type="button" [chooseButton]="true" (click)="openLinkedTappSelectDialog()">{{ getLinkedTapp() }}</button>
+          <button chaynsButton type="button" [chooseButton]="true" (click)="openLinkedTappSelectDialog()">
+            {{ getLinkedTapp() }}
+          </button>
         </div>
       </div>
       <div class="form-field">
@@ -49,20 +54,21 @@
       <div class="form-field" *ngIf="!createNew">
         <span>Tags</span>
         <div class="right">
-          <button type="button" class="choosebutton" (click)="openTagsSelectionDialog()" [disabled]="loading"
-                  [ngClass]="{'button--disabled': loading}">
+          <button type="button" chaynsButton [chooseButton]="true"
+                  (click)="openTagsSelectionDialog()"
+                  [disabled]="loading">
             {{ getTagNames() }}
           </button>
         </div>
       </div>
       <div class="form-field center">
-        <!-- TODO: use fixed version of ngx-chayns-components for disabled function -->
-        <button chaynsButton type="submit" [disabled]="shopForm.invalid || !shopForm.touched || loading"
-                [ngClass]="{'button--disabled': shopForm.invalid || !shopForm.touched || loading}">
+        <button chaynsButton type="submit" [disabled]="shopForm.invalid || !shopForm.touched || loading">
           <span *ngIf="createNew">Hinzufügen</span>
           <span *ngIf="!createNew">Speichern</span>
         </button>
-        <button chaynsButton type="button" *ngIf="!createNew" [disabled]="loading" (click)="deleteShop()">Löschen</button>
+        <button chaynsButton type="button" *ngIf="!createNew" [disabled]="loading" (click)="deleteShop()">
+          Löschen
+        </button>
       </div>
     </form>
 
