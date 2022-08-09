@@ -30,7 +30,7 @@
       <div class="form-field">
         <span>Disabled</span>
         <div class="right">
-          <input type="checkbox" class="switch" id="switch" formControlName="disabled">
+          <input type="checkbox" class="switch" id="switch" formControlName="disabled" (change)="disableChange($event)">
           <label for="switch" data-on="On" data-off="Off"></label>
         </div>
       </div>

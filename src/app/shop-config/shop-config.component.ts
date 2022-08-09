@@ -196,7 +196,6 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   openLinkedTappSelectDialog() {
-
     const list: DialogSelectConfigItem[] = chayns.env.site.tapps
       .filter(tapp => tapp.sortId >= 0)
       .sort(tapp => tapp.sortId)
@@ -236,4 +235,19 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
     return this.createNew ? null : true;
   }
 
+  async disableChange(event: Event) {
+    if (!this.shop) {
+      return;
+    }
+
+    let mashupShop: MashupShop;
+
+    if (this.shopForm.value.disabled) {
+      mashupShop = await lastValueFrom(this.mashupShopService.disableShop(this.mashupId, Number(this.shop.id)));
+    } else {
+      mashupShop = await lastValueFrom(this.mashupShopService.enableShop(this.mashupId, Number(this.shop.id)));
+    }
+
+    this.updated.emit(mashupShop);
+  }
 }

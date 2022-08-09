@@ -63,4 +63,32 @@ export class MashupShopService {
         {headers}
       );
   }
+
+  disableShop(mashupId: string, branchId: number): Observable<MashupShop> {
+    // TODO: add authorization to api service
+    const headers = {
+      'Authorization': `Bearer ${chayns.env.user.tobitAccessToken}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http
+      .patch<ApiResult<MashupShop>>(
+        `https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops/${branchId}/disable`,
+        {headers}
+      )
+      .pipe(map(res => res.data));
+  }
+
+  enableShop(mashupId: string, branchId: number): Observable<MashupShop> {
+    // TODO: add authorization to api service
+    const headers = {
+      'Authorization': `Bearer ${chayns.env.user.tobitAccessToken}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http
+      .patch<ApiResult<MashupShop>>(
+        `https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops/${branchId}/enable`,
+        {headers}
+      )
+      .pipe(map(res => res.data));
+  }
 }
