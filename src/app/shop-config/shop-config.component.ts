@@ -88,7 +88,7 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
         linkedTappId: Number(this.shopForm.value.linkedTappId) || 0,
       }));
       this.created.emit(mashupShop);
-      this.shopForm.reset();
+      this.shopForm.reset({disabled: false});
       console.log('added new mashup', mashupShop);
     } else {
       const mashupShop = await lastValueFrom(this.mashupShopService.updateShop(this.mashupId, Number(this.shopForm.value.branchId), {
