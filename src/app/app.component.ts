@@ -37,9 +37,7 @@ export class AppComponent implements OnInit {
   }
 
   async getMashup() {
-    chayns.showWaitCursor();
     this.mashup = await lastValueFrom(this.mashupService.getMashup(this.mashupId));
-    chayns.hideWaitCursor();
     if (this.initialLoading) {
       this.selectedTagIds = this.mashup.tags.map(tag => tag.id);
       this.initialLoading = false;
