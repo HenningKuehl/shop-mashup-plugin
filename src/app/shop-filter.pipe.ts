@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 import {MashupShop} from "./models/mashup-shop";
 
 @Pipe({
@@ -8,9 +8,9 @@ export class ShopFilterPipe implements PipeTransform {
 
   transform(shops: MashupShop[], selectedTagIds: string[], allTagsSelected: boolean): MashupShop[] {
     if (allTagsSelected) {
-      return shops;
+      return shops.filter(shop => !shop.disabled);
     }
-    return shops.filter(shop => shop.tagRefs.map(ref => ref.id).some(tagId => selectedTagIds.includes(tagId)));
+    return shops.filter(shop => shop.tagRefs.map(ref => ref.id).some(tagId => selectedTagIds.includes(tagId)) && !shop.disabled);
   }
 
 }
