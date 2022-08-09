@@ -39,7 +39,7 @@
         <div class="right">
           <smp-file-upload fileName="icon"
                            [filePath]="getImagePath()"
-                           [disabled]="shopForm.controls.branchId.invalid || shop?.iconUrl !== '' || loading">
+                           [disabled]="shopForm.controls.branchId.invalid || loading">
           </smp-file-upload>
         </div>
       </div>
@@ -47,7 +47,7 @@
         <span>Background Image</span>
         <div class="right">
           <smp-file-upload fileName="background" [filePath]="getImagePath()"
-                           [disabled]="shopForm.controls.branchId.invalid || shop?.backgroundUrl !== '' || loading">
+                           [disabled]="shopForm.controls.branchId.invalid || loading">
           </smp-file-upload>
         </div>
       </div>

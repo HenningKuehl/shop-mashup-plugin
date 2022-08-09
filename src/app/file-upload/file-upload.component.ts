@@ -11,6 +11,9 @@ export class FileUploadComponent implements OnInit {
   @Input() disabled = false;
   @Input() filePath!: string;
   @Input() fileName!: string;
+  @Input() change = false;
+
+  @Output() upload = new EventEmitter();
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   private selectedFile: File | null = null;
@@ -56,6 +59,7 @@ export class FileUploadComponent implements OnInit {
       this.downloadUrl = fileRef.getDownloadURL();
       this.uploading = false;
       this.uploaded = true;
+      this.upload.emit();
     })).subscribe();
     this.uploadPercent = uploadTask.percentageChanges();
   }
