@@ -1,42 +1,48 @@
-<div class="tile" [ngClass]="{'linked': hasLink()}" (click)="clickTile()">
-  <div class="header" fxLayout="row" fxLayoutAlign="center center" [style.background-image]="'url(' + shop.backgroundUrl + ')'">
-    <div class="icon">
-      <img *ngIf="shop.iconUrl" [src]="shop.iconUrl">
+<div class="chayns-card chayns__background-color--cw-background chayns__color--text"
+     [ngClass]="{'linked': hasLink()}" fxLayout="column" fxLayoutAlign="space-between stretch">
+  <div>
+    <div class="thumbnail" [style.background-image]="'url(' + shop.backgroundUrl + ')'" fxLayout="row" fxLayoutAlign="center center">
+      <!--    <img [src]="shop.backgroundUrl" class="background">-->
+      <img [src]="shop.iconUrl" class="icon">
     </div>
-  </div>
-  <div class="content" fxLayout="column">
-    <div fxLayout="row" fxLayoutAlign="space-between">
-      <div fxLayout="row" fxLayoutAlign="start center"  >
-        <div class="name">
-          {{ shop.showName || shop.name }}
-        </div>
-        <div class="tags" *ngIf="getTagNames().length">
-          <span> | </span>
-          <span *ngFor="let tag of getTagNames(); let last = last;">
+    <div class="content">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+
+        <h2 class="headline chayns__color--headline">{{ shop.showName || shop.name }}</h2>
+        <!--<div class="status" *ngIf="shop.live">
+          <div class="opened" *ngIf="shop.live.open">Geöffnet</div>
+          <div class="closed" *ngIf="!shop.live.open">Geschlossen</div>
+        </div>-->
+      </div>
+      <div class="tags">
+        <chayns-chip-list>
+          <chayns-filter-button *ngFor="let tag of getTagNames(); let last = last;"
+                                [small]="true"
+                                [rectangular]="true"
+                                [selectable]="false">
             {{ tag }}
-            <span *ngIf="!last"> · </span>
-          </span>
+            <!--        <span *ngIf="!last"> · </span>-->
+          </chayns-filter-button>
+        </chayns-chip-list>
+      </div>
+      <div class="processors" *ngIf="shop.live">
+        <div class="processor" *ngFor="let processor of shop.live.processors">
+          <ng-container [ngSwitch]="processor.type">
+            <i *ngSwitchCase="4" class="fa fa-truck"></i>
+            <i *ngSwitchCase="8" class="fa fa-bag-shopping"></i>
+            <i *ngSwitchDefault class="fa fa-truck"></i>
+          </ng-container>
+          <span>ca. {{processor.deliveryTime}} Minuten</span>
         </div>
-      </div>
-      <div class="status" fxFlex="none" *ngIf="shop.live">
-        <div class="opened" *ngIf="shop.live.open">Geöffnet</div>
-        <div class="closed" *ngIf="!shop.live.open">Geschlossen</div>
-      </div>
-    </div>
-    <div class="processors" *ngIf="shop.live">
-      <div class="processor" *ngFor="let processor of shop.live.processors">
-        <ng-container [ngSwitch]="processor.type">
-          <i *ngSwitchCase="4" class="fa fa-truck"></i>
-          <i *ngSwitchCase="8" class="fa fa-bag-shopping"></i>
-          <i *ngSwitchDefault class="fa fa-truck"></i>
-        </ng-container>
-        <span>ca. {{processor.deliveryTime}} Minuten</span>
       </div>
     </div>
   </div>
-  <div class="footer" *ngIf="hasLink()" fxHide fxShow.xs="true" fxLayout="row" fxLayoutAlign="end center">
-    <div class="link">
-      <a [href]="shop.linkedUrl">Zum Shop >></a>
-    </div>
+<!--  <div fxFlexFill></div>-->
+  <div class="actions" *ngIf="hasLink()">
+    <button chaynsButton type="button" class="filled-tonal" (click)="clickTile()"
+            [disabled]="!isOpen()">
+      <span *ngIf="!isOpen()">Geschlossen</span>
+      <span *ngIf="isOpen()">Bestellen</span>
+    </button>
   </div>
 </div>

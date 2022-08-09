@@ -53,4 +53,8 @@ export class ShopTileComponent implements OnInit, OnDestroy {
     return this.shop.linkedUrl !== '' || this.shop.linkedTappId !== 0;
   }
 
+  isOpen(): boolean {
+    return this.shop.live === undefined ? true : this.shop.live.open;
+  }
+
 }
