@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CpsAppHelperService, isShopMashupPluginInstanceConfig} from "cps-app-helper";
 import {MashupService} from "./services/mashup.service";
-import {lastValueFrom, Observable} from "rxjs";
-import {Mashup} from "./models/mashup";
 import {MashupShop} from "./models/mashup-shop";
 import {Identifier} from "./models/identifier";
 import {FilterButtonComponent} from "ngx-chayns-components";
@@ -13,12 +11,14 @@ import {FilterButtonComponent} from "ngx-chayns-components";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  mashup: Mashup | null = null;
   adminMode = chayns.env.user.adminMode;
   selectedTagIds: string[] = [];
   allTagsSelected: boolean = true;
   initialLoading: boolean = true;
   mashupId!: string;
+
+  shops = this.mashupService.shops.asObservable();
+  tags = this.mashupService.tags.asObservable();
 
   constructor(private cpsAppHelper: CpsAppHelperService, private mashupService: MashupService) {
   }
@@ -31,21 +31,21 @@ export class AppComponent implements OnInit {
       const config = appInstance.config;
       if (config && isShopMashupPluginInstanceConfig(config)) {
         this.mashupId = config.mashupRef.id;
-        this.getMashup();
+        this.loadMashup();
       }
     });
   }
 
-  async getMashup() {
-    this.mashup = await lastValueFrom(this.mashupService.getMashup(this.mashupId));
+  async loadMashup() {
+    await this.mashupService.loadMashup(this.mashupId);
     if (this.initialLoading) {
-      this.selectedTagIds = this.mashup.tags.map(tag => tag.id);
+      this.selectedTagIds = this.mashupService.tags.getValue().map(tag => tag.id);
       this.initialLoading = false;
     }
   }
 
   newShopAdded(shop: MashupShop) {
-    this.getMashup();
+    this.loadMashup();
   }
 
   identify(index: number, item: Identifier): string {
@@ -54,10 +54,6 @@ export class AppComponent implements OnInit {
 
   tagSelectionChanged(chips: FilterButtonComponent[]): void {
     this.selectedTagIds = chips.map(chip => chip.id);
-    if (this.selectedTagIds.length === this.mashup?.tags.length) {
-      this.allTagsSelected = true;
-    } else {
-      this.allTagsSelected = false;
-    }
+    this.allTagsSelected = this.selectedTagIds.length === this.mashupService.tags.getValue().length;
   }
 }

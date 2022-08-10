@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ApiResult} from "../models/api-result";
 import {Mashup} from "../models/mashup";
-import {BehaviorSubject, lastValueFrom, map, Observable, tap} from "rxjs";
+import {BehaviorSubject, lastValueFrom, map, Observable, ReplaySubject, tap} from "rxjs";
 import {Tag} from "../models/tag";
-import {MashupShop} from "../models/mashup-shop";
+import {MashupShop, MashupShopLiveData} from "../models/mashup-shop";
 
 @Injectable({
   providedIn: 'root'
@@ -12,21 +12,23 @@ import {MashupShop} from "../models/mashup-shop";
 export class MashupService {
   tags: BehaviorSubject<Tag[]> = new BehaviorSubject<Tag[]>([]);
   shops: BehaviorSubject<MashupShop[]> = new BehaviorSubject<MashupShop[]>([]);
+  mashup: ReplaySubject<Mashup> = new ReplaySubject<Mashup>(1);
 
   constructor(private http: HttpClient) {
   }
 
-  getMashup(mashupId: string): Observable<Mashup> {
+  async loadMashup(mashupId: string) {
     // TODO: get mashupId by cps-apps-helper
-    return this.http
-      .get<ApiResult<Mashup>>(`https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}?live=true`)
+    await lastValueFrom(this.http
+      .get<ApiResult<Mashup>>(`https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}?live=false`)
       .pipe(
         map(res => res.data),
         tap(mashup => {
+          this.mashup.next(mashup);
           this.tags.next(mashup.tags);
           this.shops.next(mashup.shops);
         })
-      );
+      ));
   }
 
   addTag(mashupId: string, name: string): Observable<Tag> {
@@ -81,5 +83,15 @@ export class MashupService {
 
     const mashupShops = await Promise.all(promises);
     return mashupShops[mashupShops.length - 1];
+  }
+
+  updateMashupShopLiveData(shopId: string, data: MashupShopLiveData): void {
+    const shops = this.shops.getValue();
+    const shop = shops.find(shop => shop.id === shopId);
+    if (!shop) {
+      return;
+    }
+    shop.live = data;
+    this.shops.next(shops);
   }
 }

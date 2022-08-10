@@ -6,7 +6,10 @@ import {MashupShop} from "./models/mashup-shop";
 })
 export class ShopFilterPipe implements PipeTransform {
 
-  transform(shops: MashupShop[], selectedTagIds: string[], allTagsSelected: boolean): MashupShop[] {
+  transform(shops: MashupShop[] | null, selectedTagIds: string[], allTagsSelected: boolean): MashupShop[] {
+    if (!shops) {
+      return [];
+    }
     if (allTagsSelected) {
       return shops.filter(shop => !shop.disabled);
     }

@@ -8,18 +8,19 @@
         Config
       </div>
     </div>-->
-    <div chayns-accordion headerTitle="Shops" *ngIf="mashup">
-      <smp-shop-config *ngFor="let shop of mashup.shops; trackBy: identify"
-                       [shop]="shop" [mashupId]="mashup.id"
-                       (updated)="getMashup()" (deleted)="getMashup()">
+    <div chayns-accordion headerTitle="Shops">
+      <smp-shop-config *ngFor="let shop of shops | async; trackBy: identify"
+                       [shop]="shop" [mashupId]="mashupId"
+                       (updated)="loadMashup()" (deleted)="loadMashup()">
       </smp-shop-config>
-      <smp-shop-config [mashupId]="mashup.id" (created)="newShopAdded($event)"></smp-shop-config>
+      <smp-shop-config [mashupId]="mashupId" (created)="newShopAdded($event)"></smp-shop-config>
     </div>
-    <div chayns-accordion headerTitle="Tags" *ngIf="mashup">
-      <smp-tag-config *ngFor="let tag of mashup.tags; trackBy: identify" [tagId]="tag.id" [name]="tag.name" [mashupId]="mashup.id"
-                      (updated)="getMashup()" (deleted)="getMashup()">
+    <div chayns-accordion headerTitle="Tags">
+      <smp-tag-config *ngFor="let tag of tags | async; trackBy: identify" [tagId]="tag.id" [name]="tag.name"
+                      [mashupId]="mashupId"
+                      (updated)="loadMashup()" (deleted)="loadMashup()">
       </smp-tag-config>
-      <smp-tag-config [mashupId]="mashup.id" (created)="getMashup()"></smp-tag-config>
+      <smp-tag-config [mashupId]="mashupId" (created)="loadMashup()"></smp-tag-config>
     </div>
   </div>
 

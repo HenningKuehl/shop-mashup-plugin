@@ -25,8 +25,8 @@
           </chayns-filter-button>
         </chayns-chip-list>
       </div>
-      <div class="processors" *ngIf="shop.live">
-        <div class="processor" *ngFor="let processor of shop.live.processors">
+      <div class="processors" *ngIf="live">
+        <div class="processor" *ngFor="let processor of live.processors">
           <ng-container [ngSwitch]="processor.type">
             <i *ngSwitchCase="4" class="fa fa-truck"></i>
             <i *ngSwitchCase="8" class="fa fa-bag-shopping"></i>
@@ -41,8 +41,13 @@
   <div class="actions" *ngIf="hasLink()">
     <button chaynsButton type="button" class="filled-tonal" (click)="clickTile()"
             [disabled]="!isOpen()">
-      <span *ngIf="!isOpen()">Geschlossen</span>
-      <span *ngIf="isOpen()">Bestellen</span>
+      <ng-container *ngIf="!loadingLiveData">
+        <span *ngIf="!isOpen()">Geschlossen</span>
+        <span *ngIf="isOpen()">Bestellen</span>
+      </ng-container>
+      <span *ngIf="loadingLiveData">
+        <chayns-small-wait-cursor></chayns-small-wait-cursor>
+      </span>
     </button>
   </div>
 </div>
