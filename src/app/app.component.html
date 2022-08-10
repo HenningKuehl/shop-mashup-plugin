@@ -39,7 +39,7 @@
     <div class="tiles" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between stretch"
          fxLayoutGap="4px 8px grid">
       <smp-shop-tile
-        *ngFor="let shop of (shops | async) | shopFilter:selectedTagIds:allTagsSelected | shopOrder; trackBy: identify"
+        *ngFor="let shop of shops | async | shopFilter:selectedTagIds:allTagsSelected | shopOrder:shopOrderType; trackBy: identify"
         fxFlex="0 1 calc(50% - 4px)" [shop]="shop" [mashupId]="mashupId">
       </smp-shop-tile>
     </div>

@@ -92,6 +92,6 @@ export class MashupService {
       return;
     }
     shop.live = data;
-    this.shops.next(shops);
+    this.shops.next([...shops]);
   }
 }

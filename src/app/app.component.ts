@@ -4,6 +4,7 @@ import {MashupService} from "./services/mashup.service";
 import {MashupShop} from "./models/mashup-shop";
 import {Identifier} from "./models/identifier";
 import {FilterButtonComponent} from "ngx-chayns-components";
+import {ShopOrderType} from "./models/shop-order-type";
 
 @Component({
   selector: 'smp-root',
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
 
   shops = this.mashupService.shops.asObservable();
   tags = this.mashupService.tags.asObservable();
+  shopOrderType: ShopOrderType = ShopOrderType.openStatus;
 
   constructor(private cpsAppHelper: CpsAppHelperService, private mashupService: MashupService) {
   }
