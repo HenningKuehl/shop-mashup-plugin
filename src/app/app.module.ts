@@ -16,6 +16,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import { TagConfigComponent } from './tag-config/tag-config.component';
 import { ShopFilterPipe } from './shop-filter.pipe';
 import { ShopOrderPipe } from './shop-order.pipe';
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ShopOrderPipe } from './shop-order.pipe';
     CpsAppHelperService,
     ShopFilterPipe,
     ShopOrderPipe,
+    DatePipe,
   ],
   bootstrap: [AppComponent]
 })

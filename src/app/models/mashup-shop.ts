@@ -18,6 +18,7 @@ export interface MashupShop extends Identifier {
 
 export interface MashupShopLiveData {
   open: boolean;
+  openFrom?: string;
   processors: MashupShopProcessor[];
 }
 
