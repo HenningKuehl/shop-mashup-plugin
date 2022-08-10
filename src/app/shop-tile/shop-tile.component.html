@@ -1,5 +1,5 @@
 <div class="chayns-card chayns__background-color--cw-background chayns__color--text"
-     [ngClass]="{'linked': hasLink()}" fxLayout="column" fxLayoutAlign="space-between stretch">
+     [ngClass]="{'linked': hasLink(), 'live-data': (live && isOpen()) || hasLink()}" fxLayout="column" fxLayoutAlign="space-between stretch">
   <div>
     <div class="thumbnail" [style.background-image]="'url(' + (backgroundUrl | async) + ')'" fxLayout="row" fxLayoutAlign="center center">
       <!--    <img [src]="shop.backgroundUrl" class="background">-->
@@ -21,29 +21,32 @@
           </chayns-filter-button>
         </chayns-chip-list>
       </div>
-      <div class="processors" *ngIf="live">
-        <div class="processor" *ngFor="let processor of live.processors">
-          <ng-container [ngSwitch]="processor.type">
-            <i *ngSwitchCase="4" class="fa fa-truck"></i>
-            <i *ngSwitchCase="8" class="fa fa-bag-shopping"></i>
-            <i *ngSwitchDefault class="fa fa-truck"></i>
-          </ng-container>
-          <span>ca. {{processor.deliveryTime}} Minuten</span>
-        </div>
-      </div>
     </div>
   </div>
-<!--  <div fxFlexFill></div>-->
-  <div class="actions" *ngIf="hasLink()">
-    <button chaynsButton type="button" class="filled-tonal" (click)="clickTile()"
-            [disabled]="!isOpen()">
-      <ng-container *ngIf="!loadingLiveData">
-        <span *ngIf="!isOpen()">Geschlossen</span>
-        <span *ngIf="isOpen()">Bestellen</span>
-      </ng-container>
-      <span *ngIf="loadingLiveData">
+  <div fxLayout="row" fxLayoutAlign="space-between end">
+    <div class="processors" *ngIf="live && isOpen()" fxFlexAlign="start">
+      <div class="processor" *ngFor="let processor of live.processors">
+        <ng-container [ngSwitch]="processor.type">
+          <i *ngSwitchCase="4" class="fa fa-truck"></i>
+          <i *ngSwitchCase="8" class="fa fa-bag-shopping"></i>
+          <i *ngSwitchDefault class="fa fa-truck"></i>
+        </ng-container>
+        <span>ca. {{processor.deliveryTime}} Minuten</span>
+      </div>
+    </div>
+    <div>
+      <!-- placeholder to align actions to the right -->
+    </div>
+    <div class="actions" *ngIf="hasLink()">
+      <button chaynsButton type="button" class="filled-tonal" (click)="clickTile()">
+        <ng-container *ngIf="!loadingLiveData">
+          <span *ngIf="!isOpen()">Geschlossen</span>
+          <span *ngIf="isOpen()">Bestellen</span>
+        </ng-container>
+        <span *ngIf="loadingLiveData">
         <chayns-small-wait-cursor></chayns-small-wait-cursor>
       </span>
-    </button>
+      </button>
+    </div>
   </div>
 </div>
