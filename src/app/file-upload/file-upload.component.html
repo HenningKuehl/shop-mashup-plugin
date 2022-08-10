@@ -1,4 +1,4 @@
-<button chaynsButton [chooseButton]="true" [disabled]="disabled || uploading"
+<button chaynsButton [chooseButton]="true" type="button" [disabled]="disabled || uploading"
         (click)="openFileSelection()">
   <span *ngIf="!uploaded && !uploading">Auswählen</span>
   <span *ngIf="uploading">{{ uploadPercent | async }} %</span>
