@@ -17,6 +17,12 @@ import { TagConfigComponent } from './tag-config/tag-config.component';
 import { ShopFilterPipe } from './shop-filter.pipe';
 import { ShopOrderPipe } from './shop-order.pipe';
 import {DatePipe} from "@angular/common";
+import {CdkMenuModule} from "@angular/cdk/menu";
+import {OverlayModule} from "@angular/cdk/overlay";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from "@angular/material/button";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -39,7 +45,11 @@ import {DatePipe} from "@angular/common";
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [
     CpsAppHelperService,

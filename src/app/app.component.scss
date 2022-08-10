@@ -6,3 +6,13 @@
 .filter {
   margin-bottom: 10px;
 }
+
+.chayns-text-button {
+  background-color: transparent;
+  box-shadow: none;
+
+  &:hover {
+    //background-color: var(--chayns-color--402) !important;
+    background-color: rgba(var(--chayns-color-rgb--408), 0.3) !important;
+  }
+}

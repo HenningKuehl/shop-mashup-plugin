@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
   shops = this.mashupService.shops.asObservable();
   tags = this.mashupService.tags.asObservable();
   shopOrderType: ShopOrderType = ShopOrderType.openStatus;
+  shopOrderTypeEnum = ShopOrderType;
 
   constructor(private cpsAppHelper: CpsAppHelperService, private mashupService: MashupService) {
   }
@@ -57,5 +58,9 @@ export class AppComponent implements OnInit {
   tagSelectionChanged(chips: FilterButtonComponent[]): void {
     this.selectedTagIds = chips.map(chip => chip.id);
     this.allTagsSelected = this.selectedTagIds.length === this.mashupService.tags.getValue().length;
+  }
+
+  setShopOrderType(shopOrderType: ShopOrderType) {
+    this.shopOrderType = shopOrderType;
   }
 }
