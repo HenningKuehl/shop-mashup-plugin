@@ -1,9 +1,10 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {MashupShop} from "../models/mashup-shop";
+import {MashupShop, MashupShopLiveData} from "../models/mashup-shop";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {finalize, firstValueFrom, lastValueFrom, Subscription} from "rxjs";
+import {finalize, firstValueFrom, lastValueFrom, Observable, Subscription} from "rxjs";
 import {MashupService} from "../services/mashup.service";
 import {Tag} from "../models/tag";
+import {MashupShopService} from "../services/mashup-shop.service";
 
 @Component({
   selector: 'smp-shop-tile',
@@ -17,16 +18,39 @@ export class ShopTileComponent implements OnInit, OnDestroy {
   tags: Tag[] = [];
   tagsSubscription: Subscription | null = null;
 
-  constructor(private mashupService: MashupService) {
+  liveSubscription: Subscription | null = null;
+  live: MashupShopLiveData | undefined = undefined;
+  loadingLiveData = false;
+
+  iconUrl = new Observable<string>();
+  backgroundUrl = new Observable<string>();
+
+  constructor(
+    private mashupService: MashupService,
+    private mashupShopService: MashupShopService,
+    private storage: AngularFireStorage
+  ) {
   }
 
   ngOnInit(): void {
     this.subscribeTags();
+    if (this.shop.live) {
+      this.live = this.shop.live;
+    } else {
+      this.loadingLiveData = true;
+      this.subscribeLiveData();
+    }
+
+    this.getBackgroundUrl();
+    this.getIconUrl();
   }
 
   ngOnDestroy() {
     if (this.tagsSubscription) {
       this.tagsSubscription.unsubscribe();
+    }
+    if (this.liveSubscription) {
+      this.liveSubscription.unsubscribe();
     }
   }
 
@@ -55,6 +79,27 @@ export class ShopTileComponent implements OnInit, OnDestroy {
 
   isOpen(): boolean {
     return this.shop.live === undefined ? true : this.shop.live.open;
+  }
+
+  private getIconUrl() {
+    this.iconUrl = this.storage
+      .ref(`shop-mashup-plugin/${this.mashupId}/${this.shop.id}/icon.jpg`)
+      .getDownloadURL();
+  }
+
+  private getBackgroundUrl() {
+    this.backgroundUrl = this.storage
+      .ref(`shop-mashup-plugin/${this.mashupId}/${this.shop.id}/background.jpg`)
+      .getDownloadURL();
+      // .subscribe(url => console.log(url));
+  }
+
+  private subscribeLiveData(): void {
+    this.mashupShopService.getLiveData(this.mashupId, Number(this.shop.id))
+      .subscribe(liveData => {
+        this.live = liveData;
+        this.loadingLiveData = false;
+      });
   }
 
 }

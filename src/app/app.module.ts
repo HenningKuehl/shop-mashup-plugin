@@ -15,6 +15,7 @@ import { ShopTileComponent } from './shop-tile/shop-tile.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { TagConfigComponent } from './tag-config/tag-config.component';
 import { ShopFilterPipe } from './shop-filter.pipe';
+import { ShopOrderPipe } from './shop-order.pipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ShopFilterPipe } from './shop-filter.pipe';
     ShopTileComponent,
     TagConfigComponent,
     ShopFilterPipe,
+    ShopOrderPipe,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import { ShopFilterPipe } from './shop-filter.pipe';
   ],
   providers: [
     CpsAppHelperService,
-    ShopFilterPipe
+    ShopFilterPipe,
+    ShopOrderPipe,
   ],
   bootstrap: [AppComponent]
 })

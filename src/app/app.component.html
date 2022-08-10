@@ -30,18 +30,18 @@
       <chayns-small-wait-cursor></chayns-small-wait-cursor>
     </div>
   </div>
-  <div chayns-tapp-content *ngIf="mashup">
-    <div class="filter" *ngIf="mashup.tags.length">
+  <div chayns-tapp-content>
+    <div class="filter" *ngIf="(tags | async)?.length">
       <chayns-chip-list [selectAllChip]="true" (change)="tagSelectionChanged($event)">
-        <chayns-filter-button *ngFor="let tag of mashup.tags" [id]="tag.id">{{ tag.name }}</chayns-filter-button>
+        <chayns-filter-button *ngFor="let tag of tags | async" [id]="tag.id">{{ tag.name }}</chayns-filter-button>
       </chayns-chip-list>
     </div>
-    <div class="tiles" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between stretch" fxLayoutGap="4px 8px grid">
-      <!--<div *ngFor="let test of [1,2,3,4]" style="background-color: aqua; min-height: 200px; margin-bottom: 8px;" fxFlex="0 1 calc(50% - 8px)">
-        {{test}}
-      </div>-->
-              <smp-shop-tile *ngFor="let shop of mashup.shops | shopFilter:selectedTagIds:allTagsSelected; trackBy: identify" fxFlex="0 1 calc(50% - 4px)" [shop]="shop" [mashupId]="mashup.id"></smp-shop-tile>
-
+    <div class="tiles" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between stretch"
+         fxLayoutGap="4px 8px grid">
+      <smp-shop-tile
+        *ngFor="let shop of (shops | async) | shopFilter:selectedTagIds:allTagsSelected | shopOrder; trackBy: identify"
+        fxFlex="0 1 calc(50% - 4px)" [shop]="shop" [mashupId]="mashupId">
+      </smp-shop-tile>
     </div>
   </div>
 </div>

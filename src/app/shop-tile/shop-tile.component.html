@@ -1,18 +1,14 @@
 <div class="chayns-card chayns__background-color--cw-background chayns__color--text"
      [ngClass]="{'linked': hasLink()}" fxLayout="column" fxLayoutAlign="space-between stretch">
   <div>
-    <div class="thumbnail" [style.background-image]="'url(' + shop.backgroundUrl + ')'" fxLayout="row" fxLayoutAlign="center center">
+    <div class="thumbnail" [style.background-image]="'url(' + (backgroundUrl | async) + ')'" fxLayout="row" fxLayoutAlign="center center">
       <!--    <img [src]="shop.backgroundUrl" class="background">-->
-      <img [src]="shop.iconUrl" class="icon">
+      <img *ngIf="iconUrl | async as iconUrl" [src]="iconUrl" class="icon">
     </div>
     <div class="content">
       <div fxLayout="row" fxLayoutAlign="space-between center">
 
         <h2 class="headline chayns__color--headline">{{ shop.showName || shop.name }}</h2>
-        <!--<div class="status" *ngIf="shop.live">
-          <div class="opened" *ngIf="shop.live.open">Geöffnet</div>
-          <div class="closed" *ngIf="!shop.live.open">Geschlossen</div>
-        </div>-->
       </div>
       <div class="tags">
         <chayns-chip-list>
