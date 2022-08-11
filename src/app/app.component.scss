@@ -10,9 +10,10 @@
 .chayns-text-button {
   background-color: transparent;
   box-shadow: none;
+  color: var(--chayns-color--text);
 
   &:hover {
     //background-color: var(--chayns-color--402) !important;
-    background-color: rgba(var(--chayns-color-rgb--408), 0.3) !important;
+    background-color: rgba(var(--chayns-color-rgb--408), 0.1) !important;
   }
 }
