@@ -26,7 +26,7 @@ export class ShopOrderPipe implements PipeTransform {
           if (deliveryProcessorB && b.live?.open && !deliveryProcessorA) {
             return 1;
           }
-          return this.defaultOrder(a, b);
+          return this.sortByOpenStatus(a, b);
         });
 
       case ShopOrderType.pickUpTime:
@@ -43,7 +43,7 @@ export class ShopOrderPipe implements PipeTransform {
           if (pickUpProcessorB && b.live?.open && !pickUpProcessorA) {
             return 1;
           }
-          return this.defaultOrder(a, b);
+          return this.sortByOpenStatus(a, b);
         });
 
       case ShopOrderType.name:
@@ -63,12 +63,37 @@ export class ShopOrderPipe implements PipeTransform {
 
       case ShopOrderType.openStatus:
       default:
-        return shops.sort(this.defaultOrder);
+        return shops.sort(this.sortByOpenStatus);
     }
   }
 
-  private defaultOrder(a: MashupShop, b: MashupShop): number {
-    return a.live?.open === b.live?.open ? 0 : a.live?.open ? -1 : 1;
+  private sortByOpenStatus(a: MashupShop, b: MashupShop): number {
+    const openA = a.live?.open;
+    const openB = b.live?.open;
+    const openFromA = a.live?.openFrom;
+    const openFromB = b.live?.openFrom;
+
+    if (openA && openB) {
+      return 0;
+    }
+
+    if (!openA && !openB) {
+      if (openFromA && openFromB) {
+        return new Date(openFromA).getTime() - new Date(openFromB).getTime();
+      }
+
+      if (openFromA && !openFromB) {
+        return -1
+      }
+
+      return !openFromA && openFromB ? 1 : 0;
+    }
+
+    if (openA) {
+      return -1;
+    }
+
+    return 1;
   }
 
 }
