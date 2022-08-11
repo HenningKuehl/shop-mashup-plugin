@@ -1,25 +1,33 @@
 <div class="chayns-card chayns__background-color--cw-background chayns__color--text"
-     [ngClass]="{'linked': hasLink(), 'live-data': (live && isOpen()) || hasLink()}" fxLayout="column" fxLayoutAlign="space-between stretch">
+     [ngClass]="{'linked': hasLink(), 'live-data': (live && isOpen()) || hasLink()}" fxLayout="column"
+     fxLayoutAlign="space-between stretch">
   <div>
-    <div class="thumbnail" [style.background-image]="'url(' + (backgroundUrl | async) + ')'" fxLayout="row" fxLayoutAlign="center center">
+    <div class="thumbnail" [style.background-image]="'url(' + (backgroundUrl | async) + ')'" fxLayout="row"
+         fxLayoutAlign="center center">
       <!--    <img [src]="shop.backgroundUrl" class="background">-->
-      <img *ngIf="iconUrl | async as iconUrl" [src]="iconUrl" class="icon">
+      <!--      <img *ngIf="iconUrl | async as iconUrl" [src]="iconUrl" class="icon">-->
     </div>
     <div class="content">
-      <div fxLayout="row" fxLayoutAlign="space-between center">
-
-        <h2 class="headline chayns__color--headline">{{ shop.showName || shop.name }}</h2>
-      </div>
-      <div class="tags">
-        <chayns-chip-list>
-          <chayns-filter-button *ngFor="let tag of getTagNames(); let last = last;"
-                                [small]="true"
-                                [rectangular]="true"
-                                [selectable]="false">
-            {{ tag }}
-            <!--        <span *ngIf="!last"> · </span>-->
-          </chayns-filter-button>
-        </chayns-chip-list>
+      <div fxLayout="row" fxLayoutAlign=" center">
+        <div class="avatar">
+          <img *ngIf="iconUrl | async as iconUrl" [src]="iconUrl" class="icon">
+        </div>
+        <div fxLayout="column">
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <h2 class="headline chayns__color--headline">{{ shop.showName || shop.name }}</h2>
+          </div>
+          <div class="tags">
+            <chayns-chip-list>
+              <chayns-filter-button *ngFor="let tag of getTagNames(); let last = last;"
+                                    [small]="true"
+                                    [rectangular]="true"
+                                    [selectable]="false">
+                {{ tag }}
+                <!--        <span *ngIf="!last"> · </span>-->
+              </chayns-filter-button>
+            </chayns-chip-list>
+          </div>
+        </div>
       </div>
     </div>
   </div>
