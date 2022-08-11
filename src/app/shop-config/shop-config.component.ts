@@ -75,7 +75,6 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   async addOrSaveShop() {
-    console.log(this.shopForm.value);
     chayns.showWaitCursor();
     this.loading = true;
     if (this.createNew) {
@@ -89,7 +88,6 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
       }));
       this.created.emit(mashupShop);
       this.shopForm.reset({disabled: false});
-      console.log('added new mashup', mashupShop);
     } else {
       const mashupShop = await lastValueFrom(this.mashupShopService.updateShop(this.mashupId, Number(this.shopForm.value.branchId), {
         name: this.shopForm.value.name || '',
@@ -99,7 +97,6 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
         locationId: Number(this.shopForm.value.locationId),
         linkedTappId: Number(this.shopForm.value.linkedTappId) || 0,
       }));
-      console.log('updated shop', mashupShop);
       this.updated.emit(mashupShop);
     }
 
@@ -148,11 +145,7 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
         const removedTagIds = tagIds
           .filter(id => !selectedTagIds.includes(id));
 
-        console.log('added tag ids', addedTagIds);
-        console.log('removed tag ids', removedTagIds);
-
         const mashupShop = await this.mashupService.updateTagsForShop(this.mashupId, this.shop.id, addedTagIds, removedTagIds);
-        console.log('updated tags', mashupShop);
         this.updated.emit(mashupShop);
       }
       chayns.hideWaitCursor();
@@ -183,7 +176,6 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
   deleteShop(): void {
     chayns.dialog.confirm('Shop löschen', 'Soll der Shop wirklich gelöscht werden?')
       .then(async result => {
-        console.log(result, this.shop, this.createNew);
         if (result === buttonType.POSITIVE && this.shop && !this.createNew) {
           chayns.showWaitCursor();
           this.loading = true;

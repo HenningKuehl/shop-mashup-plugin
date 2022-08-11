@@ -33,12 +33,10 @@ export class TagConfigComponent implements OnInit {
     chayns.showWaitCursor();
     if (this.createNew && this.name) {
       const tag = await lastValueFrom(this.mashupService.addTag(this.mashupId, this.name));
-      console.log('added new tag', tag);
       this.name = '';
       this.created.emit(tag);
     } else if (this.tagId && this.name) {
       const tag = await lastValueFrom(this.mashupService.updateTag(this.mashupId, this.tagId, this.name));
-      console.log('updated tag', tag);
       this.updated.emit(tag);
     }
     chayns.hideWaitCursor();
@@ -50,7 +48,6 @@ export class TagConfigComponent implements OnInit {
     chayns.showWaitCursor();
     if (this.tagId) {
       const result = await lastValueFrom(this.mashupService.deleteTag(this.mashupId, this.tagId));
-      console.log('deleted tag', result);
       this.deleted.emit(this.tagId);
     }
     chayns.hideWaitCursor();

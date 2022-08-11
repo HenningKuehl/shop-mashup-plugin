@@ -32,7 +32,6 @@ export class FileUploadComponent implements OnInit {
   }
 
   selectFile(event: Event) {
-    console.log(event.target);
     const target = event.target;
     if (!target) {
       return;

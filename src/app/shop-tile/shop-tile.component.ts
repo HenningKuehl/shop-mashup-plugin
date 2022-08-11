@@ -91,7 +91,6 @@ export class ShopTileComponent implements OnInit, OnDestroy {
     this.backgroundUrl = this.storage
       .ref(`shop-mashup-plugin/${this.mashupId}/${this.shop.id}/background.jpg`)
       .getDownloadURL();
-      // .subscribe(url => console.log(url));
   }
 
   private subscribeLiveData(): void {
@@ -101,5 +100,4 @@ export class ShopTileComponent implements OnInit, OnDestroy {
         this.loadingLiveData = false;
       });
   }
-
 }

@@ -30,7 +30,6 @@ export class AppComponent implements OnInit {
     // TODO: check authentication
     // TODO: optimize mashup loading
     this.cpsAppHelper.getAppInstance().subscribe(appInstance => {
-      console.log('app instance', appInstance.config);
       const config = appInstance.config;
       if (config && isShopMashupPluginInstanceConfig(config)) {
         this.mashupId = config.mashupRef.id;

@@ -2,10 +2,7 @@
      [ngClass]="{'linked': hasLink(), 'live-data': (live && isOpen()) || hasLink()}" fxLayout="column"
      fxLayoutAlign="space-between stretch">
   <div>
-    <div class="thumbnail" [style.background-image]="'url(' + (backgroundUrl | async) + ')'" fxLayout="row"
-         fxLayoutAlign="center center">
-      <!--    <img [src]="shop.backgroundUrl" class="background">-->
-      <!--      <img *ngIf="iconUrl | async as iconUrl" [src]="iconUrl" class="icon">-->
+    <div class="thumbnail" [style.background-image]="'url(' + (backgroundUrl | async) + ')'">
     </div>
     <div class="content">
       <div fxLayout="row" fxLayoutAlign=" center">
@@ -23,7 +20,6 @@
                                     [rectangular]="true"
                                     [selectable]="false">
                 {{ tag }}
-                <!--        <span *ngIf="!last"> · </span>-->
               </chayns-filter-button>
             </chayns-chip-list>
           </div>
@@ -42,9 +38,11 @@
         <span>ca. {{processor.deliveryTime}} Minuten</span>
       </div>
     </div>
+
     <div>
       <!-- placeholder to align actions to the right -->
     </div>
+
     <div class="actions" *ngIf="hasLink()">
       <button chaynsButton type="button" class="filled-tonal" (click)="clickTile()">
         <ng-container *ngIf="!loadingLiveData">
@@ -57,5 +55,6 @@
       </span>
       </button>
     </div>
+
   </div>
 </div>

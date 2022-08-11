@@ -8,7 +8,6 @@ import {ShopOrderType} from "./models/shop-order-type";
 export class ShopOrderPipe implements PipeTransform {
 
   transform(shops: MashupShop[] | null, orderType: ShopOrderType): MashupShop[] {
-    console.log('shop order pipe', shops);
     if (!shops) {
       return [];
     }
