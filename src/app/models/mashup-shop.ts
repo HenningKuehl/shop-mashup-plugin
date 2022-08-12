@@ -1,7 +1,6 @@
 import {Identifier} from "./identifier";
-import {Mashup} from "./mashup";
 
-export type WriteMashupShop = Pick<MashupShop, 'name' | 'showName' | 'linkedUrl' | 'disabled' | 'locationId' | 'linkedTappId'>;
+export type WriteMashupShop = Pick<MashupShop, 'name' | 'showName' | 'linkedUrl' | 'disabled' | 'locationId' | 'linkedTappId' | 'iconStoragePath' | 'backgroundStoragePath'>;
 
 export interface MashupShop extends Identifier {
   name: string;
@@ -14,6 +13,8 @@ export interface MashupShop extends Identifier {
   tagRefs: Identifier[];
   live?: MashupShopLiveData;
   locationId: number;
+  iconStoragePath?: string;
+  backgroundStoragePath?: string;
 }
 
 export interface MashupShopLiveData {

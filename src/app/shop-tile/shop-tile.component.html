@@ -6,8 +6,8 @@
     </div>
     <div class="content">
       <div fxLayout="row" fxLayoutAlign=" center">
-        <div class="avatar">
-          <img *ngIf="iconUrl | async as iconUrl" [src]="iconUrl" class="icon">
+        <div class="avatar" *ngIf="iconUrl | async as iconUrl">
+          <img [src]="iconUrl" class="icon">
         </div>
         <div fxLayout="column">
           <div fxLayout="row" fxLayoutAlign="space-between center">

@@ -28,7 +28,9 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
     linkedUrl: [''],
     linkedTappId: [''],
     disabled: [false, Validators.required],
-    locationId: ['', [Validators.required, Validators.min(1)]]
+    locationId: ['', [Validators.required, Validators.min(1)]],
+    iconStoragePath: [''],
+    backgroundStoragePath: ['']
   });
 
   createNew = false;
@@ -55,7 +57,9 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
           linkedUrl: this.shop.linkedUrl || '',
           disabled: this.shop.disabled,
           locationId: `${this.shop.locationId}`,
-          linkedTappId: `${this.shop.linkedTappId}`
+          linkedTappId: `${this.shop.linkedTappId}`,
+          iconStoragePath: this.shop.iconStoragePath || '',
+          backgroundStoragePath: this.shop.backgroundStoragePath || ''
         })
       }
     }
@@ -85,6 +89,8 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
         disabled: this.shopForm.value.disabled || false,
         locationId: Number(this.shopForm.value.locationId),
         linkedTappId: Number(this.shopForm.value.linkedTappId) || 0,
+        iconStoragePath: this.shopForm.value.iconStoragePath || '',
+        backgroundStoragePath: this.shopForm.value.backgroundStoragePath || ''
       }));
       this.created.emit(mashupShop);
       this.shopForm.reset({disabled: false});
@@ -96,6 +102,8 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
         disabled: this.shopForm.value.disabled || false,
         locationId: Number(this.shopForm.value.locationId),
         linkedTappId: Number(this.shopForm.value.linkedTappId) || 0,
+        iconStoragePath: this.shopForm.value.iconStoragePath || '',
+        backgroundStoragePath: this.shopForm.value.backgroundStoragePath || ''
       }));
       this.updated.emit(mashupShop);
     }
@@ -208,7 +216,7 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
           linkedTappId: result.selection[0].value,
           linkedUrl: '',
         });
-        this.shopForm.markAsTouched();
+        this.shopForm.markAsDirty();
       }
     }).catch(console.error);
   }
@@ -241,5 +249,15 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     this.updated.emit(mashupShop);
+  }
+
+  updateIconStoragePath(selectedFile: {path: string}): void {
+    this.shopForm.patchValue({iconStoragePath: selectedFile.path});
+    this.shopForm.markAsDirty();
+  }
+
+  updateBackgroundStoragePath(selectedFile: {path: string}): void {
+    this.shopForm.patchValue({backgroundStoragePath: selectedFile.path});
+    this.shopForm.markAsDirty();
   }
 }

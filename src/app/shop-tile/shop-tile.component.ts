@@ -1,17 +1,18 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {MashupShop, MashupShopLiveData} from "../models/mashup-shop";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {finalize, firstValueFrom, lastValueFrom, Observable, Subscription} from "rxjs";
 import {MashupService} from "../services/mashup.service";
 import {Tag} from "../models/tag";
 import {MashupShopService} from "../services/mashup-shop.service";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'smp-shop-tile',
   templateUrl: './shop-tile.component.html',
   styleUrls: ['./shop-tile.component.scss']
 })
-export class ShopTileComponent implements OnInit, OnDestroy {
+export class ShopTileComponent implements OnChanges, OnInit, OnDestroy {
   // TODO: get mashupId via service
   @Input() mashupId!: string;
   @Input() shop!: MashupShop;
@@ -32,6 +33,13 @@ export class ShopTileComponent implements OnInit, OnDestroy {
   ) {
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['shop']) {
+      this.getBackgroundUrl();
+      this.getIconUrl();
+    }
+  }
+
   ngOnInit(): void {
     this.subscribeTags();
     if (this.shop.live) {
@@ -40,9 +48,6 @@ export class ShopTileComponent implements OnInit, OnDestroy {
       this.loadingLiveData = true;
       this.subscribeLiveData();
     }
-
-    this.getBackgroundUrl();
-    this.getIconUrl();
   }
 
   ngOnDestroy() {
@@ -82,15 +87,19 @@ export class ShopTileComponent implements OnInit, OnDestroy {
   }
 
   private getIconUrl() {
-    this.iconUrl = this.storage
-      .ref(`shop-mashup-plugin/${this.mashupId}/${this.shop.id}/icon.jpg`)
-      .getDownloadURL();
+    if (this.shop.iconStoragePath) {
+      this.iconUrl = this.storage
+        .ref(this.shop.iconStoragePath)
+        .getDownloadURL();
+    }
   }
 
   private getBackgroundUrl() {
-    this.backgroundUrl = this.storage
-      .ref(`shop-mashup-plugin/${this.mashupId}/${this.shop.id}/background.jpg`)
-      .getDownloadURL();
+    if (this.shop.backgroundStoragePath) {
+      this.backgroundUrl = this.storage
+        .ref(this.shop.backgroundStoragePath)
+        .getDownloadURL()
+    }
   }
 
   private subscribeLiveData(): void {
