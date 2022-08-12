@@ -9,11 +9,12 @@ import {AngularFireStorage} from "@angular/fire/compat/storage";
 })
 export class FileUploadComponent implements OnInit {
   @Input() disabled = false;
-  @Input() filePath!: string;
+  @Input() baseFilePath !: string;
   @Input() fileName!: string;
   @Input() change = false;
 
   @Output() upload = new EventEmitter();
+  @Output() selectFile = new EventEmitter<{path: string}>;
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   private selectedFile: File | null = null;
@@ -31,7 +32,7 @@ export class FileUploadComponent implements OnInit {
     this.fileInput.nativeElement.click();
   }
 
-  selectFile(event: Event) {
+  fileSelected(event: Event) {
     const target = event.target;
     if (!target) {
       return;
@@ -51,9 +52,11 @@ export class FileUploadComponent implements OnInit {
 
   pushFileToStorage(file: File) {
     this.uploading = true;
-    const filePath = `${this.filePath}/${this.fileName}.${file.name.split('.').pop()}`;
+    const filePath = `${this.baseFilePath}/${this.fileName}.${file.name.split('.').pop()}`;
+    this.selectFile.emit({path: filePath});
     const fileRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, file);
+
     uploadTask.snapshotChanges().pipe(finalize(() => {
       this.downloadUrl = fileRef.getDownloadURL();
       this.uploading = false;
