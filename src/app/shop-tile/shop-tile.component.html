@@ -45,14 +45,12 @@
 
     <div class="actions" *ngIf="hasLink()">
       <button chaynsButton type="button" class="filled-tonal" (click)="clickTile()">
-        <ng-container *ngIf="!loadingLiveData">
-          <span *ngIf="!isOpen() && live && !live.openFrom">Geschlossen</span>
-          <span *ngIf="!isOpen() && live && live.openFrom">Geöffnet ab {{ live.openFrom | date:'HH:mm' }} Uhr</span>
-          <span *ngIf="isOpen() || !live">Bestellen</span>
-        </ng-container>
+        <span *ngIf="!loadingLiveData">
+          {{ isOpen() | shopOpenStatus:live }}
+        </span>
         <span *ngIf="loadingLiveData">
-        <chayns-small-wait-cursor></chayns-small-wait-cursor>
-      </span>
+          <chayns-small-wait-cursor></chayns-small-wait-cursor>
+        </span>
       </button>
     </div>
 
