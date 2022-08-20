@@ -16,6 +16,7 @@ export class ShopTileComponent implements OnChanges, OnInit, OnDestroy {
   // TODO: get mashupId via service
   @Input() mashupId!: string;
   @Input() shop!: MashupShop;
+
   tags: Tag[] = [];
   tagsSubscription: Subscription | null = null;
 
@@ -25,6 +26,8 @@ export class ShopTileComponent implements OnChanges, OnInit, OnDestroy {
 
   iconUrl = new Observable<string>();
   backgroundUrl = new Observable<string>();
+
+  adminMode = chayns.env.user.adminMode;
 
   constructor(
     private mashupService: MashupService,
@@ -84,6 +87,56 @@ export class ShopTileComponent implements OnChanges, OnInit, OnDestroy {
 
   isOpen(): boolean {
     return this.shop.live === undefined ? true : this.shop.live.open;
+  }
+
+  disableProcessor(id: number): void {
+    chayns.showWaitCursor();
+    this.mashupShopService.disableProcessor(this.mashupId, this.shop.id, id)
+      .subscribe({
+          next: () => {
+            const processor = this.live?.processors.find(processor => processor.id === id);
+            if (processor) {
+              processor.disabled = true;
+            }
+          },
+          error: error => console.log(error),
+          complete: () => {
+            chayns.hideWaitCursor();
+            // @ts-ignore
+            chayns.dialog.toast({
+              description: 'Bestellabschluss erfolgreich ausgeblendet.',
+              showCloseIcon: true,
+              showDurationBar: false,
+              duration: 2000
+            });
+          }
+        }
+      );
+  }
+
+  enableProcessor(id: number): void {
+    chayns.showWaitCursor();
+    this.mashupShopService.enableProcessor(this.mashupId, this.shop.id, id)
+      .subscribe({
+          next: () => {
+            const processor = this.live?.processors.find(processor => processor.id === id);
+            if (processor) {
+              processor.disabled = false;
+            }
+          },
+          error: error => console.log(error),
+          complete: () => {
+            chayns.hideWaitCursor();
+            // @ts-ignore
+            chayns.dialog.toast({
+              description: 'Bestellabschluss erfolgreich eingeblendet.',
+              showCloseIcon: true,
+              showDurationBar: false,
+              duration: 2000
+            });
+          }
+        }
+      );
   }
 
   private getIconUrl() {

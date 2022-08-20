@@ -28,14 +28,31 @@
     </div>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between end">
+
     <div class="processors" *ngIf="live && isOpen()" fxFlexAlign="start">
-      <div class="processor" *ngFor="let processor of live.processors">
-        <ng-container [ngSwitch]="processor.type">
-          <i *ngSwitchCase="4" class="fa fa-truck"></i>
-          <i *ngSwitchCase="8" class="fa fa-bag-shopping"></i>
-          <i *ngSwitchDefault class="fa fa-truck"></i>
+      <div class="processor" [ngClass]="{'processor--disabled': processor.disabled}"
+           *ngFor="let processor of live.processors"
+           fxLayout="row" fxLayoutAlign="space-between center">
+        <ng-container *ngIf="adminMode || !processor.disabled">
+          <div [title]="processor.name">
+            <ng-container [ngSwitch]="processor.type">
+              <i *ngSwitchCase="4" class="fa fa-truck"></i>
+              <i *ngSwitchCase="8" class="fa fa-bag-shopping"></i>
+              <i *ngSwitchDefault class="fa fa-truck"></i>
+            </ng-container>
+            <span>ca. {{processor.deliveryTime}} Minuten</span>
+          </div>
+          <div>
+            <ng-container *ngIf="adminMode">
+              <button mat-icon-button title="Ausblenden" *ngIf="!processor.disabled">
+                <mat-icon [inline]="true" (click)="disableProcessor(processor.id)">visibility_off</mat-icon>
+              </button>
+              <button mat-icon-button title="Einblenden" *ngIf="processor.disabled">
+                <mat-icon [inline]="true" (click)="enableProcessor(processor.id)">visibility</mat-icon>
+              </button>
+            </ng-container>
+          </div>
         </ng-container>
-        <span>ca. {{processor.deliveryTime}} Minuten</span>
       </div>
     </div>
 

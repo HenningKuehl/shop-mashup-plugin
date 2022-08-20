@@ -55,8 +55,13 @@
     padding-left: 16px;
     padding-bottom: 16px;
     min-width: fit-content;
+    width: 100%;
 
     .processor {
+      &.processor--disabled {
+        opacity: 0.5;
+      }
+
       i {
         //text-align: center;
         width: 25px;

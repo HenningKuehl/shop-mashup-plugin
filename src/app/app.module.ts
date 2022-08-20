@@ -24,6 +24,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
 import { ShopOpenStatusPipe } from './shop-open-status.pipe';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ShopOpenStatusPipe } from './shop-open-status.pipe';
     BrowserAnimationsModule,
     MatButtonModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ],
   providers: [
     CpsAppHelperService,

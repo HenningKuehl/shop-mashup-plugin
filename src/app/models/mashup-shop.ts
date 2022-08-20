@@ -24,10 +24,12 @@ export interface MashupShopLiveData {
 }
 
 export interface MashupShopProcessor {
+  id: number;
   name: string;
   type: MashupShopProcessorType;
   open: boolean;
   deliveryTime: number;
+  disabled: boolean;
 }
 
 export enum MashupShopProcessorType {

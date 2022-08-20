@@ -113,4 +113,36 @@ export class MashupShopService {
         })
       );
   }
+
+  disableProcessor(mashupId: string, shopId: string, processorId: number): Observable<MashupShop> {
+    // TODO: add authorization to api service
+    const headers = {
+      'Authorization': `Bearer ${chayns.env.user.tobitAccessToken}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http
+      .patch<ApiResult<MashupShop>>(
+        `https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops/${shopId}/processors/${processorId}/disable`,
+        {headers}
+      )
+      .pipe(
+        map(res => res.data),
+      );
+  }
+
+  enableProcessor(mashupId: string, shopId: string, processorId: number): Observable<MashupShop> {
+    // TODO: add authorization to api service
+    const headers = {
+      'Authorization': `Bearer ${chayns.env.user.tobitAccessToken}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http
+      .patch<ApiResult<MashupShop>>(
+        `https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops/${shopId}/processors/${processorId}/enable`,
+        {headers}
+      )
+      .pipe(
+        map(res => res.data),
+      );
+  }
 }
