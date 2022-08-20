@@ -44,10 +44,10 @@
           </div>
           <div>
             <ng-container *ngIf="adminMode">
-              <button mat-icon-button title="Ausblenden" *ngIf="!processor.disabled">
+              <button mat-icon-button class="chayns-icon-button" title="Ausblenden" *ngIf="!processor.disabled">
                 <mat-icon [inline]="true" (click)="disableProcessor(processor.id)">visibility_off</mat-icon>
               </button>
-              <button mat-icon-button title="Einblenden" *ngIf="processor.disabled">
+              <button mat-icon-button class="chayns-icon-button"  title="Einblenden" *ngIf="processor.disabled">
                 <mat-icon [inline]="true" (click)="enableProcessor(processor.id)">visibility</mat-icon>
               </button>
             </ng-container>
