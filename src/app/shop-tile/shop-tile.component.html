@@ -2,8 +2,11 @@
      [ngClass]="{'linked': hasLink(), 'live-data': (live && isOpen()) || hasLink()}" fxLayout="column"
      fxLayoutAlign="space-between stretch">
   <div>
-    <div class="thumbnail" [style.background-image]="'url(' + (backgroundUrl | async) + ')'">
-    </div>
+    <div
+      class="thumbnail"
+      [style.background-image]="'url(' + (backgroundUrl | async) + ')'"
+      (click)="clickTile()"
+    ></div>
     <div class="content">
       <div fxLayout="row" fxLayoutAlign=" center">
         <div class="avatar" *ngIf="iconUrl | async as iconUrl">
@@ -29,7 +32,7 @@
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between end">
 
-    <div class="processors" *ngIf="live && isOpen()" fxFlexAlign="start">
+    <div class="processors" *ngIf="live && (isOpen() || adminMode)" fxFlexAlign="start">
       <div class="processor" [ngClass]="{'processor--disabled': processor.disabled}"
            *ngFor="let processor of live.processors"
            fxLayout="row" fxLayoutAlign="space-between center">
