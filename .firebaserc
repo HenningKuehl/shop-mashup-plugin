@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "chayns-page-store"
+  },
+  "targets": {
+    "chayns-page-store": {
+      "hosting": {
+        "shop-mashup-plugin": [
+          "shop-mashup-plugin"
+        ]
+      }
+    }
   }
 }
