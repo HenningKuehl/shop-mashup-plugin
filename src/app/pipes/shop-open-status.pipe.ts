@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {MashupShopLiveData} from "./models/mashup-shop";
+import {MashupShopLiveData} from "../models/mashup-shop";
 import {DatePipe} from "@angular/common";
 
 @Pipe({

@@ -30,7 +30,13 @@
       <div class="form-field">
         <span>Disabled</span>
         <div class="right">
-          <input type="checkbox" class="switch" [id]="'disabledSwitch' + (this.shop?.id || 'CreateNew')" formControlName="disabled" (change)="disableChange($event)">
+          <input
+            type="checkbox"
+            class="switch"
+            formControlName="disabled"
+            [id]="'disabledSwitch' + (this.shop?.id || 'CreateNew')"
+            (change)="disableChange($event)"
+          >
           <label [for]="'disabledSwitch' + (this.shop?.id || 'CreateNew')" data-on="On" data-off="Off"></label>
         </div>
       </div>

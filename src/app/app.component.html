@@ -3,11 +3,7 @@
   <!-- Admin view -->
   <div chayns-tapp-content *ngIf="adminMode">
     <h2>Shop Mashup Plugin - Administration</h2>
-    <!--<div chayns-accordion headerTitle="Configuration">
-      <div chayns-accordion-content>
-        Config
-      </div>
-    </div>-->
+
     <div chayns-accordion headerTitle="Shops">
       <smp-shop-config *ngFor="let shop of shops | async; trackBy: identify"
                        [shop]="shop" [mashupId]="mashupId"
@@ -35,7 +31,14 @@
       <chayns-chip-list *ngIf="(tags | async)?.length" [selectAllChip]="true" (change)="tagSelectionChanged($event)">
         <chayns-filter-button *ngFor="let tag of tags | async" [id]="tag.id">{{ tag.name }}</chayns-filter-button>
       </chayns-chip-list>
-      <button chaynsButton class="chayns-text-button" fxFlexAlign="end" fxLayout="row" fxLayoutAlign=" center" [matMenuTriggerFor]="menu">
+      <button
+        chaynsButton
+        class="chayns-text-button"
+        fxFlexAlign="end"
+        fxLayout="row"
+        fxLayoutAlign=" center"
+        [matMenuTriggerFor]="menu"
+      >
         Sortieren nach: <mat-icon>import_export</mat-icon>
       </button>
       <mat-menu #menu="matMenu" xPosition="after" class="chayns-menu">
@@ -58,7 +61,9 @@
       </mat-menu>
     </div>
 
-    <ng-container *ngIf="shops | async | shopFilter:selectedTagIds:allTagsSelected | shopOrder:shopOrderType as filteredShops; else noShopsFound">
+    <ng-container
+      *ngIf="shops | async | shopFilter:selectedTagIds:allTagsSelected | shopOrder:shopOrderType as filteredShops; else noShopsFound"
+    >
       <div class="tiles" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between stretch"
            fxLayoutGap="4px 8px grid">
         <smp-shop-tile
@@ -68,6 +73,7 @@
       </div>
       <ng-container *ngIf="!filteredShops.length" [ngTemplateOutlet]="noShopsFound"></ng-container>
     </ng-container>
+
     <!-- Template will be rendered if no shops are found -->
     <ng-template #noShopsFound>
       <div fxLayoutAlign="center" chaynsTappHint class="no-shops-found">

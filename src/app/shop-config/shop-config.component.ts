@@ -37,7 +37,11 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
   tags: Tag[] = [];
   tagsSubscription: Subscription | null = null;
 
-  constructor(private fb: FormBuilder, private mashupShopService: MashupShopService, private mashupService: MashupService) {
+  constructor(
+    private fb: FormBuilder,
+    private mashupShopService: MashupShopService,
+    private mashupService: MashupService
+  ) {
   }
 
   ngOnInit(): void {
@@ -82,29 +86,35 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
     chayns.showWaitCursor();
     this.loading = true;
     if (this.createNew) {
-      const mashupShop = await lastValueFrom(this.mashupShopService.addNewShop(this.mashupId, Number(this.shopForm.value.branchId), {
-        name: this.shopForm.value.name || '',
-        showName: this.shopForm.value.showName || '',
-        linkedUrl: this.shopForm.value.linkedUrl || '',
-        disabled: this.shopForm.value.disabled || false,
-        locationId: Number(this.shopForm.value.locationId),
-        linkedTappId: Number(this.shopForm.value.linkedTappId) || 0,
-        iconStoragePath: this.shopForm.value.iconStoragePath || '',
-        backgroundStoragePath: this.shopForm.value.backgroundStoragePath || ''
-      }));
+      const mashupShop = await lastValueFrom(
+        this.mashupShopService.addNewShop(this.mashupId, Number(this.shopForm.value.branchId),
+          {
+            name: this.shopForm.value.name || '',
+            showName: this.shopForm.value.showName || '',
+            linkedUrl: this.shopForm.value.linkedUrl || '',
+            disabled: this.shopForm.value.disabled || false,
+            locationId: Number(this.shopForm.value.locationId),
+            linkedTappId: Number(this.shopForm.value.linkedTappId) || 0,
+            iconStoragePath: this.shopForm.value.iconStoragePath || '',
+            backgroundStoragePath: this.shopForm.value.backgroundStoragePath || ''
+          })
+      );
       this.created.emit(mashupShop);
       this.shopForm.reset({disabled: false});
     } else {
-      const mashupShop = await lastValueFrom(this.mashupShopService.updateShop(this.mashupId, Number(this.shopForm.value.branchId), {
-        name: this.shopForm.value.name || '',
-        showName: this.shopForm.value.showName || '',
-        linkedUrl: this.shopForm.value.linkedUrl || '',
-        disabled: this.shopForm.value.disabled || false,
-        locationId: Number(this.shopForm.value.locationId),
-        linkedTappId: Number(this.shopForm.value.linkedTappId) || 0,
-        iconStoragePath: this.shopForm.value.iconStoragePath || '',
-        backgroundStoragePath: this.shopForm.value.backgroundStoragePath || ''
-      }));
+      const mashupShop = await lastValueFrom(
+        this.mashupShopService.updateShop(this.mashupId, Number(this.shopForm.value.branchId),
+          {
+            name: this.shopForm.value.name || '',
+            showName: this.shopForm.value.showName || '',
+            linkedUrl: this.shopForm.value.linkedUrl || '',
+            disabled: this.shopForm.value.disabled || false,
+            locationId: Number(this.shopForm.value.locationId),
+            linkedTappId: Number(this.shopForm.value.linkedTappId) || 0,
+            iconStoragePath: this.shopForm.value.iconStoragePath || '',
+            backgroundStoragePath: this.shopForm.value.backgroundStoragePath || ''
+          })
+      );
       this.updated.emit(mashupShop);
     }
 
@@ -153,7 +163,8 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
         const removedTagIds = tagIds
           .filter(id => !selectedTagIds.includes(id));
 
-        const mashupShop = await this.mashupService.updateTagsForShop(this.mashupId, this.shop.id, addedTagIds, removedTagIds);
+        const mashupShop = await this.mashupService
+          .updateTagsForShop(this.mashupId, this.shop.id, addedTagIds, removedTagIds);
         this.updated.emit(mashupShop);
       }
       chayns.hideWaitCursor();
@@ -228,7 +239,8 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getLinkedTapp(): string {
-    return chayns.env.site.tapps.find(tapp => tapp.id === Number(this.shopForm.value.linkedTappId))?.showName || 'Keinen Ausgewählt';
+    return chayns.env.site.tapps
+      .find(tapp => tapp.id === Number(this.shopForm.value.linkedTappId))?.showName || 'Keinen Ausgewählt';
   }
 
   disableInput(): true | null {
@@ -251,12 +263,12 @@ export class ShopConfigComponent implements OnInit, OnChanges, OnDestroy {
     this.updated.emit(mashupShop);
   }
 
-  updateIconStoragePath(selectedFile: {path: string}): void {
+  updateIconStoragePath(selectedFile: { path: string }): void {
     this.shopForm.patchValue({iconStoragePath: selectedFile.path});
     this.shopForm.markAsDirty();
   }
 
-  updateBackgroundStoragePath(selectedFile: {path: string}): void {
+  updateBackgroundStoragePath(selectedFile: { path: string }): void {
     this.shopForm.patchValue({backgroundStoragePath: selectedFile.path});
     this.shopForm.markAsDirty();
   }
