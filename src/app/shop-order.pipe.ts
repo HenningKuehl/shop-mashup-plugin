@@ -14,8 +14,8 @@ export class ShopOrderPipe implements PipeTransform {
     switch (orderType) {
       case ShopOrderType.deliveryTime:
         return shops.sort((a, b) => {
-          const deliveryProcessorA = a.live?.processors.find(p => p.type === MashupShopProcessorType.delivery);
-          const deliveryProcessorB = b.live?.processors.find(p => p.type === MashupShopProcessorType.delivery);
+          const deliveryProcessorA = a.live?.processors.find(p => p.type === MashupShopProcessorType.delivery && p.open);
+          const deliveryProcessorB = b.live?.processors.find(p => p.type === MashupShopProcessorType.delivery && p.open);
           if (deliveryProcessorA && a.live?.open && deliveryProcessorB && b.live?.open) {
             return deliveryProcessorA.deliveryTime - deliveryProcessorB.deliveryTime;
           }
@@ -30,8 +30,8 @@ export class ShopOrderPipe implements PipeTransform {
 
       case ShopOrderType.pickUpTime:
         return shops.sort((a, b) => {
-          const pickUpProcessorA = a.live?.processors.find(p => p.type === MashupShopProcessorType.pickUp);
-          const pickUpProcessorB = b.live?.processors.find(p => p.type === MashupShopProcessorType.pickUp);
+          const pickUpProcessorA = a.live?.processors.find(p => p.type === MashupShopProcessorType.pickUp && p.open);
+          const pickUpProcessorB = b.live?.processors.find(p => p.type === MashupShopProcessorType.pickUp && p.open);
           if (pickUpProcessorA && a.live?.open && pickUpProcessorB && b.live?.open) {
             return pickUpProcessorA.deliveryTime - pickUpProcessorB.deliveryTime;
           }

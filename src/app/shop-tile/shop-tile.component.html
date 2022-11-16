@@ -36,7 +36,7 @@
       <div class="processor" [ngClass]="{'processor--disabled': processor.disabled}"
            *ngFor="let processor of live.processors"
            fxLayout="row" fxLayoutAlign="space-between center">
-        <ng-container *ngIf="adminMode || !processor.disabled">
+        <ng-container *ngIf="(processor.open && !processor.disabled) || adminMode">
           <div [title]="processor.name">
             <ng-container [ngSwitch]="processor.type">
               <i *ngSwitchCase="4" class="fa fa-truck"></i>
