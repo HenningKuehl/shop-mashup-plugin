@@ -1,27 +1,11 @@
-# ShopMashupPlugin
+# Shop Mashup Plugin
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
+This project is an individual application for the customer [QONECT](https://qonect.chayns.net).
+It is a chayns plugin which shows an overview of multiple shops. 
+Information like delivery time, opening hours, etc. are shared.
 
-## Development server
+A demo is not available, but you can see a public version [here](https://vreden-bringts.de).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Development
+You can run the project with `ng serve`. <br>
+You can build the project with `ng build -c production`.

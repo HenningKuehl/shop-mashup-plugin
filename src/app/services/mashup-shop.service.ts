@@ -9,6 +9,7 @@ import {MashupService} from "./mashup.service";
   providedIn: 'root'
 })
 export class MashupShopService {
+  private baseApiUrl = 'https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api';
 
   constructor(private http: HttpClient, private mashupService: MashupService) {
   }
@@ -21,7 +22,7 @@ export class MashupShopService {
     };
     return this.http
       .post<ApiResult<MashupShop>>(
-        `https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops`,
+        `${this.baseApiUrl}/mashups/${mashupId}/shops`,
         {
           data,
           branchId
@@ -41,7 +42,7 @@ export class MashupShopService {
     };
     return this.http
       .put<ApiResult<MashupShop>>(
-        `https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops/${branchId}`,
+        `${this.baseApiUrl}/mashups/${mashupId}/shops/${branchId}`,
         {
           ...data
         },
@@ -60,7 +61,7 @@ export class MashupShopService {
     };
     return this.http
       .delete<ApiResult<{}>>(
-        `https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops/${branchId}`,
+        `${this.baseApiUrl}/mashups/${mashupId}/shops/${branchId}`,
         {headers}
       );
   }
@@ -73,7 +74,7 @@ export class MashupShopService {
     };
     return this.http
       .patch<ApiResult<MashupShop>>(
-        `https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops/${branchId}/disable`,
+        `${this.baseApiUrl}/mashups/${mashupId}/shops/${branchId}/disable`,
         {headers}
       )
       .pipe(map(res => res.data));
@@ -87,7 +88,7 @@ export class MashupShopService {
     };
     return this.http
       .patch<ApiResult<MashupShop>>(
-        `https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops/${branchId}/enable`,
+        `${this.baseApiUrl}/mashups/${mashupId}/shops/${branchId}/enable`,
         {headers}
       )
       .pipe(map(res => res.data));
@@ -101,7 +102,7 @@ export class MashupShopService {
     };
     return this.http
       .get<ApiResult<MashupShop>>(
-        `https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops/${branchId}?live=true`,
+        `${this.baseApiUrl}/mashups/${mashupId}/shops/${branchId}?live=true`,
         {headers}
       )
       .pipe(
@@ -122,7 +123,7 @@ export class MashupShopService {
     };
     return this.http
       .patch<ApiResult<MashupShop>>(
-        `https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops/${shopId}/processors/${processorId}/disable`,
+        `${this.baseApiUrl}/mashups/${mashupId}/shops/${shopId}/processors/${processorId}/disable`,
         {headers}
       )
       .pipe(
@@ -138,7 +139,7 @@ export class MashupShopService {
     };
     return this.http
       .patch<ApiResult<MashupShop>>(
-        `https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops/${shopId}/processors/${processorId}/enable`,
+        `${this.baseApiUrl}/mashups/${mashupId}/shops/${shopId}/processors/${processorId}/enable`,
         {headers}
       )
       .pipe(

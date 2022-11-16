@@ -5,7 +5,11 @@
   <span *ngIf="uploaded">Hochgeladen</span>
 </button>
 
-<input #fileInput type="file" [multiple]="false" (change)="fileSelected($event)" accept="image/*"
-       style="display: none;">
-
-<!--<img [src]="downloadUrl | async">-->
+<input
+  #fileInput
+  type="file"
+  accept="image/*"
+  style="display: none;"
+  [multiple]="false"
+  (change)="fileSelected($event)"
+>

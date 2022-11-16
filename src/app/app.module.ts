@@ -1,29 +1,27 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {NgxChaynsComponentsModule} from "ngx-chayns-components";
 import {CpsAppHelperModule, CpsAppHelperService} from "cps-app-helper";
-import { ShopConfigComponent } from './shop-config/shop-config.component';
+import {ShopConfigComponent} from './shop-config/shop-config.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import { FileUploadComponent } from './file-upload/file-upload.component';
-import { environment } from '../environments/environment';
+import {FileUploadComponent} from './file-upload/file-upload.component';
+import {environment} from '../environments/environment';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
-import { ShopTileComponent } from './shop-tile/shop-tile.component';
+import {ShopTileComponent} from './shop-tile/shop-tile.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
-import { TagConfigComponent } from './tag-config/tag-config.component';
-import { ShopFilterPipe } from './shop-filter.pipe';
-import { ShopOrderPipe } from './shop-order.pipe';
+import {TagConfigComponent} from './tag-config/tag-config.component';
+import {ShopFilterPipe} from './pipes/shop-filter.pipe';
+import {ShopOrderPipe} from './pipes/shop-order.pipe';
 import {DatePipe} from "@angular/common";
-import {CdkMenuModule} from "@angular/cdk/menu";
-import {OverlayModule} from "@angular/cdk/overlay";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
-import { ShopOpenStatusPipe } from './shop-open-status.pipe';
+import {ShopOpenStatusPipe} from './pipes/shop-open-status.pipe';
 import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
@@ -39,17 +37,18 @@ import {MatTooltipModule} from "@angular/material/tooltip";
   ],
   imports: [
     BrowserModule,
-    NgxChaynsComponentsModule,
-    CpsAppHelperModule.initializeApp(environment.applicationId),
+    BrowserAnimationsModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    // provideFirebaseApp(() => initializeApp(environment.firebase)),
-    // provideStorage(() => getStorage()),
+    FlexLayoutModule,
+
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
-    FlexLayoutModule,
-    FormsModule,
-    BrowserAnimationsModule,
+
+    CpsAppHelperModule.initializeApp(environment.applicationId),
+    NgxChaynsComponentsModule,
+
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
@@ -64,4 +63,5 @@ import {MatTooltipModule} from "@angular/material/tooltip";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

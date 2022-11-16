@@ -10,6 +10,7 @@ import {MashupShop, MashupShopLiveData} from "../models/mashup-shop";
   providedIn: 'root'
 })
 export class MashupService {
+  private baseApiUrl = 'https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api';
   tags: BehaviorSubject<Tag[]> = new BehaviorSubject<Tag[]>([]);
   shops: BehaviorSubject<MashupShop[]> = new BehaviorSubject<MashupShop[]>([]);
   mashup: ReplaySubject<Mashup> = new ReplaySubject<Mashup>(1);
@@ -20,7 +21,9 @@ export class MashupService {
   async loadMashup(mashupId: string) {
     // TODO: get mashupId by cps-apps-helper
     await lastValueFrom(this.http
-      .get<ApiResult<Mashup>>(`https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}?live=false`)
+      .get<ApiResult<Mashup>>(
+        `${this.baseApiUrl}/mashups/${mashupId}?live=false`
+      )
       .pipe(
         map(res => res.data),
         tap(mashup => {
@@ -36,7 +39,11 @@ export class MashupService {
       'Content-Type': 'application/json',
     }
     return this.http
-      .post<ApiResult<Tag>>(`https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/tags`, {name}, {headers})
+      .post<ApiResult<Tag>>(
+        `${this.baseApiUrl}/mashups/${mashupId}/tags`,
+        {name},
+        {headers}
+      )
       .pipe(map(res => res.data));
   }
 
@@ -45,16 +52,27 @@ export class MashupService {
       'Content-Type': 'application/json',
     }
     return this.http
-      .put<ApiResult<Tag>>(`https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/tags/${tagId}`, {name}, {headers})
+      .put<ApiResult<Tag>>(
+        `${this.baseApiUrl}/mashups/${mashupId}/tags/${tagId}`,
+        {name},
+        {headers}
+      )
       .pipe(map(res => res.data));
   }
 
   deleteTag(mashupId: string, tagId: string): Observable<ApiResult<{}>> {
     return this.http
-      .delete<ApiResult<{}>>(`https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/tags/${tagId}`);
+      .delete<ApiResult<{}>>(
+        `${this.baseApiUrl}/mashups/${mashupId}/tags/${tagId}`
+      );
   }
 
-  async updateTagsForShop(mashupId: string, shopId: string, addedTagIds: string[], removedTagIds: string[]): Promise<MashupShop> {
+  async updateTagsForShop(
+    mashupId: string,
+    shopId: string,
+    addedTagIds: string[],
+    removedTagIds: string[]
+  ): Promise<MashupShop> {
     const headers = {
       'Content-Type': 'application/json',
     }
@@ -65,7 +83,11 @@ export class MashupService {
       promises.push(
         lastValueFrom(
           this.http
-            .post<ApiResult<MashupShop>>(`https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops/${shopId}/tags/${tagId}`, {}, {headers})
+            .post<ApiResult<MashupShop>>(
+              `${this.baseApiUrl}/mashups/${mashupId}/shops/${shopId}/tags/${tagId}`,
+              {},
+              {headers}
+            )
             .pipe(map(res => res.data))
         )
       )
@@ -75,7 +97,9 @@ export class MashupService {
       promises.push(
         lastValueFrom(
           this.http
-            .delete<ApiResult<MashupShop>>(`https://shop-mashup-api-http-i7gk2vokkq-ez.a.run.app/api/mashups/${mashupId}/shops/${shopId}/tags/${tagId}`)
+            .delete<ApiResult<MashupShop>>(
+              `${this.baseApiUrl}/mashups/${mashupId}/shops/${shopId}/tags/${tagId}`
+            )
             .pipe(map(res => res.data))
         )
       )

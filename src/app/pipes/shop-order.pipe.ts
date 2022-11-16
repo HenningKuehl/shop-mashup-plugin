@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {MashupShop, MashupShopProcessorType} from "./models/mashup-shop";
-import {ShopOrderType} from "./models/shop-order-type";
+import {MashupShop, MashupShopProcessorType} from "../models/mashup-shop";
+import {ShopOrderType} from "../models/shop-order-type";
 
 @Pipe({
   name: 'shopOrder'
