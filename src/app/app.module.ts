@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
-import {NgxChaynsComponentsModule} from "ngx-chayns-components";
-import {CpsAppHelperModule, CpsAppHelperService} from "cps-app-helper";
+import {ChaynsAccordionModule, ChaynsWaitCursorModule, NgxChaynsComponentsModule} from "ngx-chayns-components";
+import {ChaynsPagemakerPluginModule, CpsAppHelperModule, CpsAppHelperService} from "cps-app-helper";
 import {ShopConfigComponent} from './shop-config/shop-config.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
@@ -23,6 +23,11 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
 import {ShopOpenStatusPipe} from './pipes/shop-open-status.pipe';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {PluginPageComponent} from "./plugin-page/plugin-page.component";
+import {MashupService} from "./services/mashup.service";
+import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
+import {getAuth, provideAuth} from "@angular/fire/auth";
 
 @NgModule({
   declarations: [
@@ -34,6 +39,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     ShopFilterPipe,
     ShopOrderPipe,
     ShopOpenStatusPipe,
+    PluginPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,19 +49,25 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     HttpClientModule,
     FlexLayoutModule,
 
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
 
     CpsAppHelperModule.initializeApp(environment.applicationId),
     NgxChaynsComponentsModule,
+    ChaynsPagemakerPluginModule,
 
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ChaynsWaitCursorModule,
+    ChaynsAccordionModule,
   ],
   providers: [
     CpsAppHelperService,
+    MashupService,
     ShopFilterPipe,
     ShopOrderPipe,
     DatePipe,

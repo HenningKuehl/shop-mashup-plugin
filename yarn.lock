@@ -3000,10 +3000,10 @@ cosmiconfig@^7.0.0:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
-cps-app-helper@0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/cps-app-helper/-/cps-app-helper-0.0.4.tgz#8b00d2569c48d1eaad421b714ec0da3b6ef979ae"
-  integrity sha512-UlieMw9N7kZCik52PcKj4yFXBMPfX5oW9LDSITrPPn5R3gjMRv79Y0eR60Iuh8kDU6peAYWp6ZYLIasXfjCfxA==
+cps-app-helper@^0.4.6:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/cps-app-helper/-/cps-app-helper-0.4.6.tgz#47affbf0ac3969187aa0afb21517c4f6ce441d2d"
+  integrity sha512-35qNnXgbqpuyt7WcxyTJ2fo8FZQOaRE9UoR1bjTyGTtVcilJAcmnfV9vf3twC9IPSP1IFlc5A2Faca3O7wZiVA==
   dependencies:
     tslib "^2.3.0"
 
@@ -4987,10 +4987,10 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-ngx-chayns-components@0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/ngx-chayns-components/-/ngx-chayns-components-0.0.6.tgz#be635a6543e32fc4d97d67a6f0f6d6e45ef8353a"
-  integrity sha512-jbdK3vMFC4SiQn2RuUwcaRe4kcZvPmODU7HeEtf3+8I5c1EhXJeEKejD72UbKU7gY3ZjbRwpS0FPhHAbF/5Zxw==
+ngx-chayns-components@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/ngx-chayns-components/-/ngx-chayns-components-0.8.0.tgz#9349c39dadb474caa126620a65b05dc573e1cb59"
+  integrity sha512-T/Ldpedgp/+rjJlQ6Xpsw2eOquDZ5BWFqUfSmEs+Ecwzsnx5C1nfOFX6EesHMA+ZKT5jNeKBZtqI1LQVJwUZ1g==
   dependencies:
     tslib "^2.3.0"
 
