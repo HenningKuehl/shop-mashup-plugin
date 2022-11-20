@@ -1,0 +1,86 @@
+<ng-container *ngIf="mashupId">
+
+  <!-- Admin view -->
+  <div chayns-tapp-content *ngIf="adminMode">
+    <h2>Shop Mashup Plugin - Administration</h2>
+
+    <div chayns-accordion headerTitle="Shops">
+      <smp-shop-config *ngFor="let shop of shops | async; trackBy: identify"
+                       [shop]="shop" [mashupId]="mashupId"
+                       (updated)="loadMashup()" (deleted)="loadMashup()">
+      </smp-shop-config>
+      <smp-shop-config [mashupId]="mashupId" (created)="newShopAdded($event)"></smp-shop-config>
+    </div>
+    <div chayns-accordion headerTitle="Tags">
+      <smp-tag-config *ngFor="let tag of tags | async; trackBy: identify" [tagId]="tag.id" [name]="tag.name"
+                      [mashupId]="mashupId"
+                      (updated)="loadMashup()" (deleted)="loadMashup()">
+      </smp-tag-config>
+      <smp-tag-config [mashupId]="mashupId" (created)="loadMashup()"></smp-tag-config>
+    </div>
+  </div>
+
+  <!-- Shop mashup view -->
+  <div chayns-tapp-content *ngIf="initialLoading">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <chayns-small-wait-cursor></chayns-small-wait-cursor>
+    </div>
+  </div>
+  <div chayns-tapp-content *ngIf="!initialLoading">
+    <div class="filter" fxLayout="column">
+      <chayns-chip-list *ngIf="(tags | async)?.length" [selectAllChip]="true" (change)="tagSelectionChanged($event)">
+        <chayns-filter-button *ngFor="let tag of tags | async" [id]="tag.id">{{ tag.name }}</chayns-filter-button>
+      </chayns-chip-list>
+      <button
+        chaynsButton
+        class="chayns-text-button"
+        fxFlexAlign="end"
+        fxLayout="row"
+        fxLayoutAlign=" center"
+        [matMenuTriggerFor]="menu"
+      >
+        Sortieren nach: <mat-icon>import_export</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" xPosition="after" class="chayns-menu">
+        <button mat-menu-item (click)="setShopOrderType(shopOrderTypeEnum.openStatus)">
+          <mat-icon>{{ shopOrderType === shopOrderTypeEnum.openStatus ? 'check' : '' }}</mat-icon>
+          Geöffnet
+        </button>
+        <button mat-menu-item (click)="setShopOrderType(shopOrderTypeEnum.deliveryTime)">
+          <mat-icon>{{ shopOrderType === shopOrderTypeEnum.deliveryTime ? 'check' : '' }}</mat-icon>
+          Lieferzeit
+        </button>
+        <button mat-menu-item (click)="setShopOrderType(shopOrderTypeEnum.pickUpTime)">
+          <mat-icon>{{ shopOrderType === shopOrderTypeEnum.pickUpTime ? 'check' : '' }}</mat-icon>
+          Abholzeit
+        </button>
+        <button mat-menu-item (click)="setShopOrderType(shopOrderTypeEnum.name)">
+          <mat-icon>{{ shopOrderType === shopOrderTypeEnum.name ? 'check' : '' }}</mat-icon>
+          Name
+        </button>
+      </mat-menu>
+    </div>
+
+    <ng-container
+      *ngIf="shops | async | shopFilter:selectedTagIds:allTagsSelected | shopOrder:shopOrderType as filteredShops; else noShopsFound"
+    >
+      <div class="tiles" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between stretch"
+           fxLayoutGap="4px 8px grid">
+        <smp-shop-tile
+          *ngFor="let shop of filteredShops; trackBy: identify"
+          fxFlex="0 1 calc(50% - 4px)" [shop]="shop" [mashupId]="mashupId">
+        </smp-shop-tile>
+      </div>
+      <ng-container *ngIf="!filteredShops.length" [ngTemplateOutlet]="noShopsFound"></ng-container>
+    </ng-container>
+
+    <!-- Template will be rendered if no shops are found -->
+    <ng-template #noShopsFound>
+      <div fxLayoutAlign="center" chaynsTappHint class="no-shops-found">
+        Mit diesen Filtereinstellungen wurden leider keine Shops gefunden!
+      </div>
+    </ng-template>
+
+  </div>
+
+</ng-container>
