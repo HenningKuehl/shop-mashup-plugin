@@ -42,6 +42,22 @@
     }
   }
 
+  .feedback {
+    font-size: 13px;
+
+    .feedback-average {
+      margin-right: 3px;
+    }
+
+    .feedback-star-icon {
+      color: var(--chayns-color--yellow-3);
+    }
+
+    .feedback-total-amount {
+      margin-left: 3px;
+    }
+  }
+
   &.live-data {
     .content {
       padding-bottom: 8px;
