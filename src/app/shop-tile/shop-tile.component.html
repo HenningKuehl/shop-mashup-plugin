@@ -16,16 +16,12 @@
           <div fxLayout="row" fxLayoutAlign="space-between center">
             <h2 class="headline chayns__color--headline">{{ shop.showName || shop.name }}</h2>
           </div>
-          <div class="feedback" fxLayout="row" fxLayoutAlign="start center">
-            <span class="feedback-average">4,7</span>
+          <div *ngIf="feedback" class="feedback" fxLayout="row" fxLayoutAlign="start center">
+            <span class="feedback-average">{{ feedback.average }}</span>
             <div class="feedback-stars" fxLayout="row" fxLayoutAlign="center center">
-              <mat-icon class="feedback-star-icon" inline>star</mat-icon>
-              <mat-icon class="feedback-star-icon" inline>star</mat-icon>
-              <mat-icon class="feedback-star-icon" inline>star</mat-icon>
-              <mat-icon class="feedback-star-icon" inline>star</mat-icon>
-              <mat-icon class="feedback-star-icon" inline>star_half</mat-icon>
+              <mat-icon *ngFor="let star of getFeedbackStars()" class="feedback-star-icon" inline>{{ star }}</mat-icon>
             </div>
-            <span class="feedback-total-amount">(123)</span>
+            <span class="feedback-total-amount">({{ feedback.totalAmount }})</span>
           </div>
           <div class="tags">
             <chayns-chip-list>

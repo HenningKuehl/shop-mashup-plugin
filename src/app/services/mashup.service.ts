@@ -109,13 +109,14 @@ export class MashupService {
     return mashupShops[mashupShops.length - 1];
   }
 
-  updateMashupShopLiveData(shopId: string, data: MashupShopLiveData): void {
+  updateMashupShopLiveData(shopId: string, data: MashupShop): void {
     const shops = this.shops.getValue();
     const shop = shops.find(shop => shop.id === shopId);
     if (!shop) {
       return;
     }
-    shop.live = data;
+    shop.live = data.live;
+    shop.feedback = data.feedback;
     this.shops.next([...shops]);
   }
 }
