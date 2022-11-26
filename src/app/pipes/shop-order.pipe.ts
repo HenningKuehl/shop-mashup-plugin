@@ -60,6 +60,9 @@ export class ShopOrderPipe implements PipeTransform {
           return 0;
         });
 
+      case ShopOrderType.rating:
+        return shops.sort((a,b) => (b.feedback?.average || 0) - (a.feedback?.average || 0));
+
       case ShopOrderType.openStatus:
       default:
         return shops.sort(this.sortByOpenStatus);
