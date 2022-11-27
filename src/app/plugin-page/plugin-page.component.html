@@ -58,6 +58,10 @@
           <mat-icon>{{ shopOrderType === shopOrderTypeEnum.name ? 'check' : '' }}</mat-icon>
           Name
         </button>
+        <button mat-menu-item (click)="setShopOrderType(shopOrderTypeEnum.rating)">
+          <mat-icon>{{ shopOrderType === shopOrderTypeEnum.rating ? 'check' : '' }}</mat-icon>
+          Bewertung
+        </button>
       </mat-menu>
     </div>
 

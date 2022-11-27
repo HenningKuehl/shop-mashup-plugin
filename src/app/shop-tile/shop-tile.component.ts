@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
-import {MashupShop, MashupShopLiveData} from "../models/mashup-shop";
+import {MashupShop, MashupShopFeedback, MashupShopLiveData} from "../models/mashup-shop";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {finalize, firstValueFrom, lastValueFrom, Observable, Subscription} from "rxjs";
 import {MashupService} from "../services/mashup.service";
@@ -22,6 +22,7 @@ export class ShopTileComponent implements OnChanges, OnInit, OnDestroy {
 
   liveSubscription: Subscription | null = null;
   live: MashupShopLiveData | undefined = undefined;
+  feedback: MashupShopFeedback | undefined = undefined;
   loadingLiveData = false;
 
   iconUrl = new Observable<string>();
@@ -156,10 +157,39 @@ export class ShopTileComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   private subscribeLiveData(): void {
-    this.mashupShopService.getLiveData(this.mashupId, Number(this.shop.id))
-      .subscribe(liveData => {
-        this.live = liveData;
+    this.mashupShopService.getShopWithLiveData(this.mashupId, Number(this.shop.id))
+      .subscribe(liveShop => {
+        this.live = liveShop?.live;
+        this.feedback = liveShop?.feedback;
         this.loadingLiveData = false;
       });
+  }
+
+  getFeedbackStars(): ('star' | 'star_border' | 'star_half')[] {
+    if (!this.feedback) {
+      return [];
+    }
+
+    const stars: ('star' | 'star_border' | 'star_half')[] = [];
+
+    let fullStars = Math.floor(this.feedback.average);
+    const rest = 5 - this.feedback.average;
+    if (rest < 0.05) {
+      fullStars++;
+    }
+    const emptyStars = Math.round(rest);
+    const halfStar = (fullStars + emptyStars) !== 5;
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push('star');
+    }
+    if (halfStar) {
+      stars.push('star_half');
+    }
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push('star_border')
+    };
+
+    return stars;
   }
 }

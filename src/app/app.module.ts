@@ -23,11 +23,17 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
 import {ShopOpenStatusPipe} from './pipes/shop-open-status.pipe';
 import {MatTooltipModule} from "@angular/material/tooltip";
-import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {PluginPageComponent} from "./plugin-page/plugin-page.component";
 import {MashupService} from "./services/mashup.service";
 import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
 import {getAuth, provideAuth} from "@angular/fire/auth";
+
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
+import localeDeExtra from '@angular/common/locales/extra/de';
+
+registerLocaleData(localeDe, 'de-DE', localeDeExtra);
+
 
 @NgModule({
   declarations: [

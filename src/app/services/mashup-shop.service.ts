@@ -94,7 +94,7 @@ export class MashupShopService {
       .pipe(map(res => res.data));
   }
 
-  getLiveData(mashupId: string, branchId: number): Observable<MashupShopLiveData | undefined> {
+  getShopWithLiveData(mashupId: string, branchId: number): Observable<MashupShop | undefined> {
     // TODO: add authorization to api service
     const headers = {
       'Authorization': `Bearer ${chayns.env.user.tobitAccessToken}`,
@@ -106,12 +106,12 @@ export class MashupShopService {
         {headers}
       )
       .pipe(
-        map(res => res.data.live),
-        tap(live => {
-          if (live) {
-            this.mashupService.updateMashupShopLiveData(`${branchId}`, live)
+        map(res => res.data),
+        tap(shop => {
+          if (shop.live) {
+            this.mashupService.updateMashupShopLiveData(`${branchId}`, shop)
           }
-        })
+        }),
       );
   }
 

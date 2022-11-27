@@ -15,6 +15,7 @@ export interface MashupShop extends Identifier {
   locationId: number;
   iconStoragePath?: string;
   backgroundStoragePath?: string;
+  feedback?: MashupShopFeedback;
 }
 
 export interface MashupShopLiveData {
@@ -35,4 +36,12 @@ export interface MashupShopProcessor {
 export enum MashupShopProcessorType {
   delivery = 4,
   pickUp = 8
+}
+
+export interface MashupShopFeedback {
+  from: Date;
+  to: Date;
+  average: number;
+  totalAmount: number;
+  details: {key: string, value: number}[];
 }
