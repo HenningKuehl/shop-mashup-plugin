@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build:chayns": "ng build -c vreden && ng build -c stadtlohn && ng build -c gescher && ng build -c bocholt"
   },
   "private": true,
   "dependencies": {

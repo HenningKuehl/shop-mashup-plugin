@@ -63,7 +63,20 @@
               "namedChunks": true
             },
             "vreden": {
-              "baseHref": "/77895-13517/code/shop-mashup-plugin/"
+              "baseHref": "/77895-13517/code/shop-mashup-plugin/",
+              "outputPath": "dist/vreden/shop-mashup-plugin"
+            },
+            "gescher": {
+              "baseHref": "/94108-09569/code/shop-mashup-plugin/",
+              "outputPath": "dist/gescher/shop-mashup-plugin"
+            },
+            "stadtlohn": {
+              "baseHref": "/94106-11368/code/shop-mashup-plugin/",
+              "outputPath": "dist/stadtlohn/shop-mashup-plugin"
+            },
+            "bocholt": {
+              "baseHref": "/94108-03706/code/shop-mashup-plugin/",
+              "outputPath": "dist/bocholt/shop-mashup-plugin"
             }
           },
           "defaultConfiguration": "production"
