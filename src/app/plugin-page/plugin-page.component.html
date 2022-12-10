@@ -47,21 +47,21 @@
             <mat-icon>{{ shopOrderType === shopOrderTypeEnum.openStatus ? 'check' : '' }}</mat-icon>
             Geöffnet
           </button>
-          <button mat-menu-item (click)="setShopOrderType(shopOrderTypeEnum.deliveryTime)">
-            <mat-icon>{{ shopOrderType === shopOrderTypeEnum.deliveryTime ? 'check' : '' }}</mat-icon>
-            Lieferzeit
-          </button>
           <button mat-menu-item (click)="setShopOrderType(shopOrderTypeEnum.pickUpTime)">
             <mat-icon>{{ shopOrderType === shopOrderTypeEnum.pickUpTime ? 'check' : '' }}</mat-icon>
             Abholzeit
           </button>
-          <button mat-menu-item (click)="setShopOrderType(shopOrderTypeEnum.name)">
-            <mat-icon>{{ shopOrderType === shopOrderTypeEnum.name ? 'check' : '' }}</mat-icon>
-            Name
+          <button mat-menu-item (click)="setShopOrderType(shopOrderTypeEnum.deliveryTime)">
+            <mat-icon>{{ shopOrderType === shopOrderTypeEnum.deliveryTime ? 'check' : '' }}</mat-icon>
+            Lieferzeit
           </button>
           <button mat-menu-item (click)="setShopOrderType(shopOrderTypeEnum.rating)">
             <mat-icon>{{ shopOrderType === shopOrderTypeEnum.rating ? 'check' : '' }}</mat-icon>
             Bewertung
+          </button>
+          <button mat-menu-item (click)="setShopOrderType(shopOrderTypeEnum.name)">
+            <mat-icon>{{ shopOrderType === shopOrderTypeEnum.name ? 'check' : '' }}</mat-icon>
+            Name
           </button>
         </mat-menu>
       </div>
