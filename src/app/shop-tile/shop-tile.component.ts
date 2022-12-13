@@ -174,7 +174,7 @@ export class ShopTileComponent implements OnChanges, OnInit, OnDestroy {
 
     let fullStars = Math.floor(this.feedback.average);
     const rest = 5 - this.feedback.average;
-    if (rest < 0.05) {
+    if (rest < 0.05 && rest > 0) {
       fullStars++;
     }
     const emptyStars = Math.round(rest);
