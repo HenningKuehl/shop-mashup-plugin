@@ -3000,10 +3000,10 @@ cosmiconfig@^7.0.0:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
-cps-app-helper@^0.4.6:
-  version "0.4.6"
-  resolved "https://registry.yarnpkg.com/cps-app-helper/-/cps-app-helper-0.4.6.tgz#47affbf0ac3969187aa0afb21517c4f6ce441d2d"
-  integrity sha512-35qNnXgbqpuyt7WcxyTJ2fo8FZQOaRE9UoR1bjTyGTtVcilJAcmnfV9vf3twC9IPSP1IFlc5A2Faca3O7wZiVA==
+cps-app-helper@0.5.8:
+  version "0.5.8"
+  resolved "https://registry.yarnpkg.com/cps-app-helper/-/cps-app-helper-0.5.8.tgz#19ff272ad9c9d24c6f4e81da195e4e6b3e2670ff"
+  integrity sha512-3CD/t//VwFTRj3ICcpI5u4EFN1pGAxyjaIgm49Zf9LGbDkeVkqbBTYPwFDSYhcLp0xmu32s5am7bNi/PNU4z/A==
   dependencies:
     tslib "^2.3.0"
 
